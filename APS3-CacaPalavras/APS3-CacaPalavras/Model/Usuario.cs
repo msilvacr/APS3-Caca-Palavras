@@ -8,6 +8,36 @@ namespace APS3_CacaPalavras.Model
 {
     class Usuario: Pessoa
     {
-        
+        //atributos
+        private int idUsuario;
+        private string email;
+        private string senha;
+
+        //construtores
+        public Usuario(string nome, DateTime dtNascimento, string[] telefone, int idUsuario, string email, string senha) : base(nome, dtNascimento, telefone)
+        { 
+            this.idUsuario = idUsuario;
+            this.email = email;
+            this.senha = senha;
+        }
+
+        //gets and sets
+        public int IdUsuario
+        {
+            get { return idUsuario; }
+            set { idUsuario = value; }
+        }
+
+        public string Email
+        {
+            get { return email; }
+            set { email = value; }
+        }
+
+        public string Senha
+        {
+            get { return senha; }
+            set { senha = value; }
+        }
     }
 }
