@@ -8,5 +8,6 @@ namespace APS3_CacaPalavras.Model
 {
     class Historico
     {
+
     }
 }
