@@ -14,8 +14,9 @@ namespace APS3_CacaPalavras
     public partial class Form1 : Form
     {
         public int i = 0; //contador de eventos
-        public int[] frow = null; //armazena a primeira posição na tabela que foi selecionada [x,y]
+        public int[] firstCell = null; //armazena a primeira posição na tabela que foi selecionada [x,y]
         string movimento; //a partir da movimentação, será determinado se o motimento foi horizontal ['h'] ou vertical ['v']
+        int[] auxCell = null;
 
         public Form1()
         {
@@ -43,41 +44,66 @@ namespace APS3_CacaPalavras
 
         private void PopularTabela()
         {
-            for(int i =0; i<19; ++i)
+            for(int p = 0; p < 20; p++)
             {
-                dg.Rows.Add(1, 2, 3, 4, 5, 6, 7, 1, 2, 3, 4, 5, 6, 7, 8, 9, 5, 3);
+                dg.Rows.Add();
+            }
+            for(int i =0; i<dg.Rows.Count; ++i)
+            {
+                for(int c =0; c < dg.Columns.Count; c++)
+                {
+                    dg.Rows[i].Cells[c].Value = string.Format("{0}, {1}", i, c);
+                }
 
             }
         }
 
         private void dg_SelectionChanged(object sender, EventArgs e)
         {
-
-            if (frow == null)
+            //verificando se já foi definida a celula inicial
+            if (dg.SelectedCells.Count == 1)
             {
-                frow = new int[] { Convert.ToInt16(dg.CurrentCell.RowIndex), Convert.ToInt16(dg.CurrentCell.ColumnIndex) };
+                firstCell = new int[] { Convert.ToInt16(dg.CurrentCell.RowIndex), Convert.ToInt16(dg.CurrentCell.ColumnIndex) };
             }
 
-            this.Text = string.Format("SelectionChanged - > [{0}, {1}]", frow[0], frow[1]);
-
-
-            if (frow == null)
+            //verificando se já existem pelo menos 2 celulas selecionadas
+            if (dg.SelectedCells.Count > 1)
             {
-                MessageBox.Show("fodseu");
-            }
-            string a = string.Format("({0})", dg.SelectedCells.Count);
-            for(int c = 0; c < dg.SelectedCells.Count; c++)
-            {
+                foreach(DataGridViewCell celulaVolta in dg.SelectedCells)
+                {
+                    if (auxCell == null)
+                    {
+                        auxCell = new int[2] { firstCell[0], firstCell[1]};
+                    }
+                    else
+                    {   //Verificando se a distância para x é maior e se a distância para y é maior ou igual a da celula selecionada atualmente, em relação à firstCell
+                        if( (Math.Abs(firstCell[0] - celulaVolta.RowIndex) > Math.Abs(firstCell[0] - auxCell[0]) || Math.Abs(firstCell[0] - celulaVolta.RowIndex) > Math.Abs(firstCell[1] - auxCell[1])  ) && Math.Abs(firstCell[1] - celulaVolta.ColumnIndex) >= Math.Abs(auxCell[1] - firstCell[1]))
+                        {
+                            auxCell[0] = celulaVolta.RowIndex;
+                            auxCell[1] = celulaVolta.ColumnIndex;
+                        }
+                        else
+                        //Verificando se a distância para y é maior e se a distância para x é maior ou igual a da celula selecionada atualmente, em relação à firstCell    
+                        if ( (Math.Abs(firstCell[1] - celulaVolta.ColumnIndex) > Math.Abs(firstCell[1] - auxCell[1]) || Math.Abs(firstCell[1] - celulaVolta.ColumnIndex) > Math.Abs(firstCell[0] - auxCell[0]) ) && Math.Abs(firstCell[0] - celulaVolta.ColumnIndex) >= Math.Abs(auxCell[0] - firstCell[0]))
+                        {
+                            auxCell[0] = celulaVolta.RowIndex;
+                            auxCell[1] = celulaVolta.ColumnIndex;
 
+                        }
+                        this.Text = string.Format("Inicial: [{0}, {1}] - celula mais distante é: [{2}, {3}]", firstCell[0], firstCell[1], auxCell[0], auxCell[1]);
+
+                    }
+                }
             }
-            //this.Text = a;
         }
 
         private void dg_MouseUp(object sender, MouseEventArgs e)
         {
 
-            frow = null;
+            firstCell = null;
+            auxCell = null;
             dg.ClearSelection();
+
         }
 
         private void dg_CurrentCellChanged(object sender, EventArgs e)
