@@ -15,35 +15,22 @@ namespace APS3_CacaPalavras
     {
         public int i = 0; //contador de eventos
         public int[] firstCell = null; //armazena a primeira posição na tabela que foi selecionada [x,y]
-        string movimento; //a partir da movimentação, será determinado se o motimento foi horizontal ['h'] ou vertical ['v']
-        int[] auxCell = null;
+        int[] auxCell = null; //armazena [x, y] da celula mais distante da firstCell
 
         public Form1()
         {
             InitializeComponent();
-            dg.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
-            dg.AllowUserToResizeRows = false;
-
-            foreach (DataGridViewColumn column in dg.Columns)
-            {
-                column.Width = 30; //tamanho fixo da primeira coluna
-            }
-
-            foreach (DataGridViewColumn row in dg.Rows)
-            {
-                row.Width = 30; //tamanho fixo da primeira coluna
-            }
-
+            //remover seleção inicial do dg 
             dg.ClearSelection();
 
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-            this.PopularTabela();
+            this.PopularTabelaFormatarTabela();
         }
-
-        private void PopularTabela()
+        private void PopularTabelaFormatarTabela()
         {
+            //popular
             for(int p = 0; p < 20; p++)
             {
                 dg.Rows.Add();
@@ -56,10 +43,30 @@ namespace APS3_CacaPalavras
                 }
 
             }
+
+            //formatar
+
+            dg.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
+            dg.AllowUserToResizeRows = false;
+
+
+            foreach (DataGridViewColumn column in dg.Columns)
+            {
+                column.Width = 35; //tamanho fixo da primeira coluna
+                column.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+                column.Resizable = DataGridViewTriState.False;
+            }
         }
+
+
+
 
         private void dg_SelectionChanged(object sender, EventArgs e)
         {
+            this.Text = "";
+            //contador de celulas verificadas no foreach
+            int teste = 0;
+
             //verificando se já foi definida a celula inicial
             if (dg.SelectedCells.Count == 1)
             {
@@ -69,32 +76,43 @@ namespace APS3_CacaPalavras
             //verificando se já existem pelo menos 2 celulas selecionadas
             if (dg.SelectedCells.Count > 1)
             {
-                foreach(DataGridViewCell celulaVolta in dg.SelectedCells)
+                //definindo a firstCell como celula aux para verificacão
+                auxCell = new int[2] { firstCell[0], firstCell[1] };
+                
+                //loop nas celulas selecionadas para encontrar celula mais distante 
+                foreach (DataGridViewCell celulaVolta in dg.SelectedCells)
                 {
-                    if (auxCell == null)
+                    teste++;
+                    //Verificando se a distância para x é maior e se a distância para y é maior ou igual a da celula selecionada atualmente, em relação à firstCell
+                    if( Math.Abs(celulaVolta.RowIndex - firstCell[0]) >= Math.Abs(auxCell[0]- firstCell[0]) && Math.Abs(celulaVolta.ColumnIndex - firstCell[1]) >= Math.Abs(auxCell[1] - firstCell[1]) )// && Math.Abs(firstCell[1] - celulaVolta.ColumnIndex) >= Math.Abs(auxCell[1] - firstCell[1]))
                     {
-                        auxCell = new int[2] { firstCell[0], firstCell[1]};
+                        auxCell[0] = celulaVolta.RowIndex;
+                        auxCell[1] = celulaVolta.ColumnIndex;
                     }
-                    else
-                    {   //Verificando se a distância para x é maior e se a distância para y é maior ou igual a da celula selecionada atualmente, em relação à firstCell
-                        if( (Math.Abs(firstCell[0] - celulaVolta.RowIndex) > Math.Abs(firstCell[0] - auxCell[0]) || Math.Abs(firstCell[0] - celulaVolta.RowIndex) > Math.Abs(firstCell[1] - auxCell[1])  ) && Math.Abs(firstCell[1] - celulaVolta.ColumnIndex) >= Math.Abs(auxCell[1] - firstCell[1]))
-                        {
-                            auxCell[0] = celulaVolta.RowIndex;
-                            auxCell[1] = celulaVolta.ColumnIndex;
-                        }
-                        else
-                        //Verificando se a distância para y é maior e se a distância para x é maior ou igual a da celula selecionada atualmente, em relação à firstCell    
-                        if ( (Math.Abs(firstCell[1] - celulaVolta.ColumnIndex) > Math.Abs(firstCell[1] - auxCell[1]) || Math.Abs(firstCell[1] - celulaVolta.ColumnIndex) > Math.Abs(firstCell[0] - auxCell[0]) ) && Math.Abs(firstCell[0] - celulaVolta.ColumnIndex) >= Math.Abs(auxCell[0] - firstCell[0]))
-                        {
-                            auxCell[0] = celulaVolta.RowIndex;
-                            auxCell[1] = celulaVolta.ColumnIndex;
+                }
 
+
+                //caso a distância de X seja maior que de Y: Movimento VERTICAL
+                if (Math.Abs(auxCell[0] - firstCell[0]) == Math.Abs(auxCell[1] - firstCell[1]))
+                {
+                    foreach (DataGridViewCell cell in dg.SelectedCells)
+                    {
+                        if (Math.Abs(cell.ColumnIndex - firstCell[1]) != Math.Abs(cell.RowIndex - firstCell[0]))
+                        {
+                            dg.Rows[cell.RowIndex].Cells[cell.ColumnIndex].Selected = false;
                         }
-                        this.Text = string.Format("Inicial: [{0}, {1}] - celula mais distante é: [{2}, {3}]", firstCell[0], firstCell[1], auxCell[0], auxCell[1]);
+                        this.Text = "@D - ";
 
                     }
                 }
+
+
+
+
+
+                    this.Text = this.Text + string.Format("{0} SELECIONADAS/ firstCell: [{1}, {2}]/ auxCell é: [{3}, {4}]/ TOTAL LOOP: [{5}]", dg.SelectedCells.Count, firstCell[0], firstCell[1], auxCell[0], auxCell[1], teste);
             }
+
         }
 
         private void dg_MouseUp(object sender, MouseEventArgs e)
