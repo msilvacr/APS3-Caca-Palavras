@@ -8,5 +8,8 @@ namespace APS3_CacaPalavras.Model
 {
     class Jogo
     {
+
+        private Usuario usuario;
+        private Palavra[] palavra;
     }
 }

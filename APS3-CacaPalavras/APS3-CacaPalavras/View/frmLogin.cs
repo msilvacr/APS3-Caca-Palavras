@@ -78,19 +78,18 @@ namespace APS3_CacaPalavras
             {
                 //definindo a firstCell como celula aux para verificacão
                 auxCell = new int[2] { firstCell[0], firstCell[1] };
-                
+
                 //loop nas celulas selecionadas para encontrar celula mais distante 
                 foreach (DataGridViewCell celulaVolta in dg.SelectedCells)
                 {
                     teste++;
                     //Verificando se a distância para x é maior e se a distância para y é maior ou igual a da celula selecionada atualmente, em relação à firstCell
-                    if( Math.Abs(celulaVolta.RowIndex - firstCell[0]) >= Math.Abs(auxCell[0]- firstCell[0]) && Math.Abs(celulaVolta.ColumnIndex - firstCell[1]) >= Math.Abs(auxCell[1] - firstCell[1]) )// && Math.Abs(firstCell[1] - celulaVolta.ColumnIndex) >= Math.Abs(auxCell[1] - firstCell[1]))
+                    if (Math.Abs(celulaVolta.RowIndex - firstCell[0]) >= Math.Abs(auxCell[0] - firstCell[0]) && Math.Abs(celulaVolta.ColumnIndex - firstCell[1]) >= Math.Abs(auxCell[1] - firstCell[1]))// && Math.Abs(firstCell[1] - celulaVolta.ColumnIndex) >= Math.Abs(auxCell[1] - firstCell[1]))
                     {
                         auxCell[0] = celulaVolta.RowIndex;
                         auxCell[1] = celulaVolta.ColumnIndex;
                     }
                 }
-
 
                 //caso a distância de X seja maior que de Y: Movimento VERTICAL
                 if (Math.Abs(auxCell[0] - firstCell[0]) == Math.Abs(auxCell[1] - firstCell[1]))
@@ -106,11 +105,7 @@ namespace APS3_CacaPalavras
                     }
                 }
 
-
-
-
-
-                    this.Text = this.Text + string.Format("{0} SELECIONADAS/ firstCell: [{1}, {2}]/ auxCell é: [{3}, {4}]/ TOTAL LOOP: [{5}]", dg.SelectedCells.Count, firstCell[0], firstCell[1], auxCell[0], auxCell[1], teste);
+                this.Text = this.Text + string.Format("{0} SELECIONADAS/ firstCell: [{1}, {2}]/ auxCell é: [{3}, {4}]/ TOTAL LOOP: [{5}]", dg.SelectedCells.Count, firstCell[0], firstCell[1], auxCell[0], auxCell[1], teste);
             }
 
         }
