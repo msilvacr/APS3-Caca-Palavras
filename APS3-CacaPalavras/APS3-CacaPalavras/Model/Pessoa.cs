@@ -20,6 +20,7 @@ namespace APS3_CacaPalavras.Model
             this.dtNascimento = dtNascimento;
             this.telefone = telefone;
         }
+        public Pessoa() { }
 
         //gets e sets
         public string Nome

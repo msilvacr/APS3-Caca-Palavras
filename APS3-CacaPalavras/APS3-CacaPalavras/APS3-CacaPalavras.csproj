@@ -12,6 +12,21 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -31,6 +46,9 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>model1.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -52,6 +70,7 @@
     <Compile Include="Model\Pessoa.cs" />
     <Compile Include="Model\Ranking.cs" />
     <Compile Include="Model\Usuario.cs" />
+    <Compile Include="Model\UsuarioLogado.cs" />
     <Compile Include="Util\TextboxMarcaDAgua.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -60,6 +79,12 @@
     </Compile>
     <Compile Include="View\FormAcesso.Designer.cs">
       <DependentUpon>FormAcesso.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\FormCriarConta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FormCriarConta.Designer.cs">
+      <DependentUpon>FormCriarConta.cs</DependentUpon>
     </Compile>
     <Compile Include="View\FrmJogo.cs">
       <SubType>Form</SubType>
@@ -83,9 +108,13 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="View\FormAcesso.resx">
       <DependentUpon>FormAcesso.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FormCriarConta.resx">
+      <DependentUpon>FormCriarConta.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\FrmJogo.resx">
       <DependentUpon>FrmJogo.cs</DependentUpon>
@@ -109,8 +138,50 @@
   <ItemGroup>
     <Folder Include="Controller\" />
     <Folder Include="DataAccessObject\" />
-    <Folder Include="Images\" />
     <Folder Include="ModelConnection\" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.6.1 %28x86 e x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Images\ico\model1.ico" />
+    <Content Include="Images\ico\model10.ico" />
+    <Content Include="Images\ico\model11.ico" />
+    <Content Include="Images\ico\model12.ico" />
+    <Content Include="Images\ico\model13.ico" />
+    <Content Include="Images\ico\model14.ico" />
+    <Content Include="Images\ico\model2.ico" />
+    <Content Include="Images\ico\model3.ico" />
+    <Content Include="Images\ico\model4.ico" />
+    <Content Include="Images\ico\model5.ico" />
+    <Content Include="Images\ico\model6.ico" />
+    <Content Include="Images\ico\model7.ico" />
+    <Content Include="Images\ico\model8.ico" />
+    <Content Include="Images\ico\model9.ico" />
+    <Content Include="model1.ico" />
+    <None Include="Resources\model14.png" />
+    <None Include="Resources\model13.png" />
+    <None Include="Resources\model12.png" />
+    <None Include="Resources\model11.png" />
+    <None Include="Resources\model9.png" />
+    <None Include="Resources\model8.png" />
+    <None Include="Resources\model7.png" />
+    <None Include="Resources\model6.png" />
+    <None Include="Resources\model5.png" />
+    <None Include="Resources\model4.png" />
+    <None Include="Resources\model3.png" />
+    <None Include="Resources\model2.png" />
+    <None Include="Resources\model1.png" />
+    <None Include="Resources\mode10.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

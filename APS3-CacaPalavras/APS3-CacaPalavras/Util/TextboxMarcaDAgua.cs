@@ -62,7 +62,7 @@ namespace APS3_CacaPalavras.Util
             if (bndTextoVacio) //si esta activo el textoVacio
                 e.Graphics.DrawString(textoVacio, new Font(this.Font, FontStyle.Italic), new SolidBrush(colorTextoVacio), new Point(0, 0));
             else
-                e.Graphics.DrawString(this.Text, this.Font, new SolidBrush(this.ForeColor), new Point(0, 0));
+                e.Graphics.DrawString(this.Text, this.Font, new SolidBrush(this.ForeColor), new Point(30, 0));
             base.OnPaint(e);
         }
     }
