@@ -8,8 +8,13 @@ namespace APS3_CacaPalavras.Model
 {
     class Jogo
     {
+        //atributos
+        Palavra[] palavras;
 
-        private Usuario usuario;
-        private Palavra[] palavra;
+        public Palavra[] Palavras
+        {
+            get { return palavras; }
+            set { palavras = value; }
+        }
     }
 }

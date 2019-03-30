@@ -6,38 +6,29 @@ using System.Threading.Tasks;
 
 namespace APS3_CacaPalavras.Model
 {
-    class Usuario: Pessoa
+    static class Usuario
     {
         //atributos
-        private int idUsuario;
-        private string email;
-        private string senha;
+        private static int idUsuario = 0;
+        private static string email;
+        private static string senha;
+        private static Pessoa pessoa;
 
-        //construtores
-        public Usuario(string nome, DateTime dtNascimento, string[] telefone, int idUsuario, string email, string senha) : base(nome, dtNascimento, telefone)
+        //metodos
+        public static void Login(int idUsuario, string email, string senha, Pessoa pessoa)
         {
-            this.idUsuario = idUsuario;
-            this.email = email;
-            this.senha = senha;
+            Usuario.idUsuario = idUsuario;
+            Usuario.email = email;
+            Usuario.senha = senha;
+            Usuario.pessoa = pessoa;
         }
 
-        //gets and sets
-        public int IdUsuario
+        public static void Logout()
         {
-            get { return idUsuario; }
-            set { idUsuario = value; }
-        }
-
-        public string Email
-        {
-            get { return email; }
-            set { email = value; }
-        }
-
-        public string Senha
-        {
-            get { return senha; }
-            set { senha = value; }
+            Usuario.idUsuario = 0;
+            Usuario.email = null;
+            Usuario.senha = null;
+            Usuario.pessoa = null;
         }
     }
 }
