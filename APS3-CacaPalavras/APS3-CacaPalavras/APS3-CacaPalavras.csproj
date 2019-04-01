@@ -64,6 +64,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataAccessObject\DaoUsuario.cs" />
+    <Compile Include="ModelConnection\DBConn.cs" />
     <Compile Include="Model\Historico.cs" />
     <Compile Include="Model\Jogo.cs" />
     <Compile Include="Model\Palavra.cs" />
@@ -137,8 +139,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controller\" />
-    <Folder Include="DataAccessObject\" />
-    <Folder Include="ModelConnection\" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">

@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace APS3_CacaPalavras.View
@@ -43,6 +37,24 @@ namespace APS3_CacaPalavras.View
         private void btnSair_Click(object sender, EventArgs e)
         {
             this.Dispose();
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            this.Visible = false;
+            FormCriarConta frmCriarConta = new FormCriarConta();
+            frmCriarConta.ShowDialog();
+            this.Visible = true;
+        }
+
+        private void labelCadastrese_MouseEnter(object sender, EventArgs e)
+        {
+            labelCadastrese.Font = new Font(labelCadastrese.Font, FontStyle.Bold);
+        }
+
+        private void labelCadastrese_MouseLeave(object sender, EventArgs e)
+        {
+            labelCadastrese.Font = new Font(labelCadastrese.Font, FontStyle.Regular);
         }
     }
 }

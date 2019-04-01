@@ -34,7 +34,7 @@
             this.txtEmail = new APS3_CacaPalavras.Util.TextboxMarcaDAgua();
             this.txtSenha = new APS3_CacaPalavras.Util.TextboxMarcaDAgua();
             this.label1 = new System.Windows.Forms.Label();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.labelCadastrese = new System.Windows.Forms.LinkLabel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -103,15 +103,18 @@
             this.label1.TabIndex = 4;
             this.label1.Text = "Ainda não tem conta?";
             // 
-            // linkLabel1
+            // labelCadastrese
             // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(171, 297);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(86, 13);
-            this.linkLabel1.TabIndex = 6;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "Cadastre-se aqui";
+            this.labelCadastrese.AutoSize = true;
+            this.labelCadastrese.Location = new System.Drawing.Point(171, 297);
+            this.labelCadastrese.Name = "labelCadastrese";
+            this.labelCadastrese.Size = new System.Drawing.Size(86, 13);
+            this.labelCadastrese.TabIndex = 6;
+            this.labelCadastrese.TabStop = true;
+            this.labelCadastrese.Text = "Cadastre-se aqui";
+            this.labelCadastrese.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            this.labelCadastrese.MouseEnter += new System.EventHandler(this.labelCadastrese_MouseEnter);
+            this.labelCadastrese.MouseLeave += new System.EventHandler(this.labelCadastrese_MouseLeave);
             // 
             // pictureBox1
             // 
@@ -140,7 +143,7 @@
             this.ClientSize = new System.Drawing.Size(329, 329);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.linkLabel1);
+            this.Controls.Add(this.labelCadastrese);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtSenha);
             this.Controls.Add(this.txtEmail);
@@ -164,7 +167,7 @@
         private Util.TextboxMarcaDAgua txtEmail;
         private Util.TextboxMarcaDAgua txtSenha;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.LinkLabel labelCadastrese;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label2;
     }
