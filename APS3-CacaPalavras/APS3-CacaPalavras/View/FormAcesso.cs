@@ -34,6 +34,20 @@ namespace APS3_CacaPalavras.View
             this.btnSair.BackColor = Color.FromArgb(217, 81, 51);
         }
 
+        private void labelCadastrese_MouseEnter(object sender, EventArgs e)
+        {
+            labelCadastrese.Font = new Font(labelCadastrese.Font, FontStyle.Bold);
+        }
+        private void labelCadastrese_MouseLeave(object sender, EventArgs e)
+        {
+            labelCadastrese.Font = new Font(labelCadastrese.Font, FontStyle.Regular);
+        }
+
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void btnSair_Click(object sender, EventArgs e)
         {
             this.Dispose();
@@ -47,14 +61,6 @@ namespace APS3_CacaPalavras.View
             this.Visible = true;
         }
 
-        private void labelCadastrese_MouseEnter(object sender, EventArgs e)
-        {
-            labelCadastrese.Font = new Font(labelCadastrese.Font, FontStyle.Bold);
-        }
 
-        private void labelCadastrese_MouseLeave(object sender, EventArgs e)
-        {
-            labelCadastrese.Font = new Font(labelCadastrese.Font, FontStyle.Regular);
-        }
     }
 }

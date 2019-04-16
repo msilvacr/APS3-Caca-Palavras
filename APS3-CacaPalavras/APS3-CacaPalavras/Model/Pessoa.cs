@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace APS3_CacaPalavras.Model
 {
-    class Pessoa
+    abstract class Pessoa
     {
         //atriubutos
         private string nome;

@@ -1,4 +1,5 @@
 ﻿using APS3_CacaPalavras.Properties;
+using System;
 using System.Data;
 using System.Data.SqlClient;
 
@@ -30,27 +31,70 @@ namespace APS3_CacaPalavras.ModelConnection
         //Executa inserts, updates e deletes
         public object ExecutarManipulacao(CommandType commandType, string nomeStoredProcedureOuTextoSql)
         {
-            //criando conexão
-            SqlConnection sqlConnection = CriarConexao();
-            //abrindo conexão
-            sqlConnection.Open();
-            //criando comando que vai transportar a informação
-            SqlCommand sqlCommand = sqlConnection.CreateCommand();
-            //inserindo informações no comando command (commandType e commandText)
-            sqlCommand.CommandType = commandType;
-            sqlCommand.CommandText = nomeStoredProcedureOuTextoSql;
-            sqlCommand.CommandTimeout = 120; //timeOut (em segundos)
+            try { 
+                //criando conexão
+                SqlConnection sqlConnection = CriarConexao();
+                //abrindo conexão
+                sqlConnection.Open();
+                //criando comando que vai transportar a informação
+                SqlCommand sqlCommand = sqlConnection.CreateCommand();
+                //inserindo informações no comando command (commandType e commandText)
+                sqlCommand.CommandType = commandType;
+                sqlCommand.CommandText = nomeStoredProcedureOuTextoSql;
+                sqlCommand.CommandTimeout = 120; //timeOut (em segundos)
 
-            //adicionando os parâmetros no comando
-            foreach(SqlParameter sqlParameter in sqlParameterCollection)
+                //adicionando os parâmetros no comando
+                foreach(SqlParameter sqlParameter in sqlParameterCollection)
+                {
+                    sqlCommand.Parameters.Add(sqlParameter);
+                }
+                return sqlCommand.ExecuteScalar();
+            }
+            catch (Exception ex)
             {
-                sqlCommand.Parameters.Add(sqlParameter);
+                throw new Exception(ex.Message);
             }
 
-
-
-
-            return new object();
         }
+
+        public DataTable ExecutarConsulta(CommandType commandType, string nomeStoredProcedureOuTextoSql)
+        {
+            try
+            {
+                //criando conexão
+                SqlConnection sqlConnection = CriarConexao();
+                //abrindo conexão
+                sqlConnection.Open();
+                //criando comando que vai transportar a informação
+                SqlCommand sqlCommand = sqlConnection.CreateCommand();
+                //inserindo informações no comando command (commandType e commandText)
+                sqlCommand.CommandType = commandType;
+                sqlCommand.CommandText = nomeStoredProcedureOuTextoSql;
+                sqlCommand.CommandTimeout = 120; //timeOut (em segundos)
+
+                //adicionando os parâmetros no comando
+                foreach (SqlParameter sqlParameter in sqlParameterCollection)
+                {
+                    sqlCommand.Parameters.Add(sqlParameter.ParameterName, sqlParameter.Value);
+                }
+
+
+                //criar um adaptador
+                SqlDataAdapter sqldataAdapter = new SqlDataAdapter(sqlCommand);
+
+                //datatable - tabela de dados vazia que irá armazenar valores vindos do mecanismo de persistência
+                DataTable dataTable = new DataTable();
+
+                //preenchendo dataTable
+                sqldataAdapter.Fill(dataTable);
+
+                return dataTable;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
     }
 }

@@ -64,6 +64,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controller\ModelFrmLogin.cs" />
     <Compile Include="DataAccessObject\DaoUsuario.cs" />
     <Compile Include="ModelConnection\DBConn.cs" />
     <Compile Include="Model\Historico.cs" />
@@ -137,9 +138,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Controller\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
       <Visible>False</Visible>
