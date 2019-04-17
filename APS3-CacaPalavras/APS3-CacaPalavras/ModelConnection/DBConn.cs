@@ -41,13 +41,14 @@ namespace APS3_CacaPalavras.ModelConnection
                 //inserindo informações no comando command (commandType e commandText)
                 sqlCommand.CommandType = commandType;
                 sqlCommand.CommandText = nomeStoredProcedureOuTextoSql;
-                sqlCommand.CommandTimeout = 120; //timeOut (em segundos)
+                sqlCommand.CommandTimeout = 7200; //timeOut (em segundos)
 
                 //adicionando os parâmetros no comando
                 foreach(SqlParameter sqlParameter in sqlParameterCollection)
                 {
-                    sqlCommand.Parameters.Add(sqlParameter);
+                    sqlCommand.Parameters.Add(new SqlParameter(sqlParameter.ParameterName, sqlParameter.Value));
                 }
+
                 return sqlCommand.ExecuteScalar();
             }
             catch (Exception ex)
@@ -75,7 +76,7 @@ namespace APS3_CacaPalavras.ModelConnection
                 //adicionando os parâmetros no comando
                 foreach (SqlParameter sqlParameter in sqlParameterCollection)
                 {
-                    sqlCommand.Parameters.Add(sqlParameter.ParameterName, sqlParameter.Value);
+                    sqlCommand.Parameters.Add(new SqlParameter(sqlParameter.ParameterName, sqlParameter.Value));
                 }
 
 

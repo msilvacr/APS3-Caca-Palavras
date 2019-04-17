@@ -134,6 +134,7 @@
             this.txtDtNascimentoSteps1.Name = "txtDtNascimentoSteps1";
             this.txtDtNascimentoSteps1.Size = new System.Drawing.Size(300, 29);
             this.txtDtNascimentoSteps1.TabIndex = 2;
+            this.txtDtNascimentoSteps1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtDtNascimentoSteps1_KeyDown);
             // 
             // btnCancelarSteps1
             // 
@@ -159,6 +160,7 @@
             this.txtTelefoneSteps1.Name = "txtTelefoneSteps1";
             this.txtTelefoneSteps1.Size = new System.Drawing.Size(154, 29);
             this.txtTelefoneSteps1.TabIndex = 3;
+            this.txtTelefoneSteps1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtTelefoneSteps1_KeyDown);
             // 
             // btnProximoSteps1
             // 
@@ -316,6 +318,7 @@
             this.txtSenhaSteps3.Size = new System.Drawing.Size(300, 29);
             this.txtSenhaSteps3.TabIndex = 10;
             this.txtSenhaSteps3.TextoVacio = "Digite uma senha forte";
+            this.txtSenhaSteps3.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSenhaSteps3_KeyDown);
             // 
             // txtConfirmarSenhaSteps3
             // 
@@ -327,6 +330,7 @@
             this.txtConfirmarSenhaSteps3.Size = new System.Drawing.Size(303, 29);
             this.txtConfirmarSenhaSteps3.TabIndex = 11;
             this.txtConfirmarSenhaSteps3.TextoVacio = "confirme a senha novamente";
+            this.txtConfirmarSenhaSteps3.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtConfirmarSenhaSteps3_KeyDown);
             // 
             // txtEmailSteps2
             // 
@@ -337,6 +341,7 @@
             this.txtEmailSteps2.Size = new System.Drawing.Size(300, 29);
             this.txtEmailSteps2.TabIndex = 6;
             this.txtEmailSteps2.TextoVacio = "ex: mJackson@gmail.com";
+            this.txtEmailSteps2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtEmailSteps2_KeyDown);
             // 
             // txtConfirmarEmailSteps2
             // 
@@ -347,6 +352,7 @@
             this.txtConfirmarEmailSteps2.Size = new System.Drawing.Size(303, 29);
             this.txtConfirmarEmailSteps2.TabIndex = 7;
             this.txtConfirmarEmailSteps2.TextoVacio = "ex: mJackson@gmail.com";
+            this.txtConfirmarEmailSteps2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtConfirmarEmailSteps2_KeyDown);
             // 
             // txtNomeSteps1
             // 
@@ -357,6 +363,7 @@
             this.txtNomeSteps1.Size = new System.Drawing.Size(300, 29);
             this.txtNomeSteps1.TabIndex = 1;
             this.txtNomeSteps1.TextoVacio = "ex: Michael Jackson";
+            this.txtNomeSteps1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtNomeSteps1_KeyDown);
             // 
             // FormCriarConta
             // 

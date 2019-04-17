@@ -11,10 +11,10 @@ namespace APS3_CacaPalavras.Model
         //atriubutos
         private string nome;
         private DateTime dtNascimento;
-        private string[] telefone;
+        private string telefone;
 
         //construtor
-        public Pessoa(string nome, DateTime dtNascimento, string[] telefone)
+        public Pessoa(string nome, DateTime dtNascimento, string telefone)
         {
             this.nome = nome;
             this.dtNascimento = dtNascimento;
@@ -33,7 +33,7 @@ namespace APS3_CacaPalavras.Model
             get { return dtNascimento; }
             set { dtNascimento = value; }
         }
-        public string[] Telefone
+        public string Telefone
         {
             get { return telefone; }
             set { telefone = value; }

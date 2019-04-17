@@ -14,7 +14,7 @@ namespace APS3_CacaPalavras.Model
         private string senha;
         
         //construtor
-        public Usuario(string nome, DateTime dtNascimento, string[] telefone, int idUsuario, string email, string senha): base(nome, dtNascimento, telefone)
+        public Usuario(string nome, DateTime dtNascimento, string telefone, int idUsuario, string email, string senha): base(nome, dtNascimento, telefone)
         {
             this.idUsuario = idUsuario;
             this.email = email;
