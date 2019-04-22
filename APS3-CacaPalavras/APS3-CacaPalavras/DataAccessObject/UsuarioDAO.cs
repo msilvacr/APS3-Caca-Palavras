@@ -1,6 +1,6 @@
 ﻿namespace APS3_CacaPalavras.DataAccessObject
 {
-    class DaoUsuario
+    class UsuarioDAO
     {
         public void EfetuarLogin()
         {

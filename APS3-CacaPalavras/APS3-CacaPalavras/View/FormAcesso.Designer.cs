@@ -31,12 +31,12 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormAcesso));
             this.btnLogin = new System.Windows.Forms.Button();
             this.btnSair = new System.Windows.Forms.Button();
-            this.txtEmail = new APS3_CacaPalavras.Util.TextboxMarcaDAgua();
-            this.txtSenha = new APS3_CacaPalavras.Util.TextboxMarcaDAgua();
             this.label1 = new System.Windows.Forms.Label();
             this.labelCadastrese = new System.Windows.Forms.LinkLabel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.txtSenha = new APS3_CacaPalavras.Util.TextboxMarcaDAgua();
+            this.txtEmail = new APS3_CacaPalavras.Util.TextboxMarcaDAgua();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -71,29 +71,6 @@
             this.btnSair.Click += new System.EventHandler(this.btnSair_Click);
             this.btnSair.MouseEnter += new System.EventHandler(this.btnSair_MouseEnter);
             this.btnSair.MouseLeave += new System.EventHandler(this.btnSair_MouseLeave);
-            // 
-            // txtEmail
-            // 
-            this.txtEmail.ColorTextoVacio = System.Drawing.Color.Gray;
-            this.txtEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 17.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtEmail.Location = new System.Drawing.Point(12, 85);
-            this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(305, 34);
-            this.txtEmail.TabIndex = 1;
-            this.txtEmail.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txtEmail.TextoVacio = "          Digite seu email";
-            // 
-            // txtSenha
-            // 
-            this.txtSenha.ColorTextoVacio = System.Drawing.Color.Gray;
-            this.txtSenha.Font = new System.Drawing.Font("Microsoft Sans Serif", 17.25F);
-            this.txtSenha.Location = new System.Drawing.Point(12, 135);
-            this.txtSenha.Name = "txtSenha";
-            this.txtSenha.PasswordChar = '*';
-            this.txtSenha.Size = new System.Drawing.Size(305, 34);
-            this.txtSenha.TabIndex = 2;
-            this.txtSenha.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txtSenha.TextoVacio = "          Digite sua senha";
             // 
             // label1
             // 
@@ -137,6 +114,31 @@
             this.label2.TabIndex = 8;
             this.label2.Text = "Acesso";
             // 
+            // txtSenha
+            // 
+            this.txtSenha.ColorTextoVacio = System.Drawing.Color.Gray;
+            this.txtSenha.Font = new System.Drawing.Font("Microsoft Sans Serif", 17.25F);
+            this.txtSenha.Location = new System.Drawing.Point(12, 135);
+            this.txtSenha.Name = "txtSenha";
+            this.txtSenha.PasswordChar = '*';
+            this.txtSenha.Size = new System.Drawing.Size(305, 34);
+            this.txtSenha.TabIndex = 2;
+            this.txtSenha.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtSenha.TextoVacio = "          Digite sua senha";
+            this.txtSenha.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSenha_KeyDown);
+            // 
+            // txtEmail
+            // 
+            this.txtEmail.ColorTextoVacio = System.Drawing.Color.Gray;
+            this.txtEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 17.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtEmail.Location = new System.Drawing.Point(12, 85);
+            this.txtEmail.Name = "txtEmail";
+            this.txtEmail.Size = new System.Drawing.Size(305, 34);
+            this.txtEmail.TabIndex = 1;
+            this.txtEmail.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtEmail.TextoVacio = "          Digite seu email";
+            this.txtEmail.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtEmail_KeyDown);
+            // 
             // FormAcesso
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -156,6 +158,7 @@
             this.Name = "FormAcesso";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Woopy!";
+            this.Load += new System.EventHandler(this.FormAcesso_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

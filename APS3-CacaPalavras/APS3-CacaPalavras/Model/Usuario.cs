@@ -20,6 +20,11 @@ namespace APS3_CacaPalavras.Model
             this.email = email;
             this.senha = senha;
         }
+        public Usuario(string nome, DateTime dtNascimento, string telefone, int idUsuario, string email) : base(nome, dtNascimento, telefone)
+        {
+            this.idUsuario = idUsuario;
+            this.email = email;
+        }
         public Usuario() { }
 
         //gets and sets

@@ -1,9 +1,7 @@
-﻿using APS3_CacaPalavras.Model;
-using APS3_CacaPalavras.ModelConnection;
-using System;
-using System.Data;
+﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using APS3_CacaPalavras.Model;
 
 namespace APS3_CacaPalavras.View
 {
@@ -125,9 +123,7 @@ namespace APS3_CacaPalavras.View
 
         private void btnVoltarSteps2_Click(object sender, EventArgs e)
         {
-            this.panelSteps1.Visible = true;
-            this.panelSteps2.Visible = false;
-            this.panelSteps3.Visible = false;
+            this.voltarSteps1();
         }
         private void btnVoltarSteps2_MouseEnter(object sender, EventArgs e)
         {
@@ -153,14 +149,26 @@ namespace APS3_CacaPalavras.View
             if (e.KeyData == Keys.Enter)
             {
                 this.avancarStepsFinal();
-                this.CadastrarUsuario();
+                string result = UsuarioControle.CadastrarUsuario(user);
+
+                if (result == "Já existe um usuário cadastrado com este e-mail")
+                {
+                    MessageBox.Show(result, "Falha!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk, MessageBoxDefaultButton.Button1);
+                    this.voltarSteps2();
+                }
+                else
+                {
+                    MessageBox.Show("Usuário criado com sucesso!", "Sucesso!", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+                    this.DialogResult = DialogResult.OK;
+                    this.Dispose();
+                }
             }
         }
 
         private void btnFinalizarSteps3_Click(object sender, EventArgs e)
         {
             this.avancarStepsFinal();
-            this.CadastrarUsuario();
+            string result = UsuarioControle.CadastrarUsuario(user);
         }
         private void btnFinalizarSteps3_MouseEnter(object sender, EventArgs e)
         {
@@ -187,6 +195,7 @@ namespace APS3_CacaPalavras.View
             this.btnVoltarSteps3.ForeColor = Color.FromArgb(255, 255, 255);
             this.btnVoltarSteps3.BackColor = Color.FromArgb(217, 81, 51);
         }
+
 
         //métodos         
         private void avancarSteps2()
@@ -269,6 +278,15 @@ namespace APS3_CacaPalavras.View
             }
         }
 
+        private void voltarSteps1()
+        {
+            this.panelSteps1.Visible = true;
+            this.panelSteps2.Visible = false;
+            this.panelSteps3.Visible = false;
+
+            this.txtNomeSteps1.Focus();
+        }
+
         private void voltarSteps2()
         {
             this.panelSteps1.Visible = false;
@@ -280,41 +298,6 @@ namespace APS3_CacaPalavras.View
 
             this.txtSenhaSteps3.Text = string.Empty;
             this.txtConfirmarSenhaSteps3.Text = string.Empty;       
-        }
-
-        private void CadastrarUsuario()
-        {
-            //criando obj conexão
-            DBConn dBConn = new DBConn();
-
-            try
-            {
-                dBConn.LimparParametros();
-
-                dBConn.AdicionarParametros("@Email", user.Email);
-                dBConn.AdicionarParametros("@Senha", user.Senha);
-                dBConn.AdicionarParametros("@Nome", user.Nome);
-                dBConn.AdicionarParametros("@DTNascimento", user.DtNascimento);
-                dBConn.AdicionarParametros("@Telefone", user.Telefone);
-
-                string idUsuario = dBConn.ExecutarManipulacao(CommandType.StoredProcedure, "uspUsuarioInserir").ToString();
-
-                if (idUsuario == "Já existe um usuário cadastrado com este e-mail")
-                {
-                    MessageBox.Show(idUsuario, "Falha!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk, MessageBoxDefaultButton.Button1);
-                    this.voltarSteps2();
-                }
-                else
-                {
-                    MessageBox.Show("Usuário criado com sucesso!", "Sucesso!", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
-                    this.DialogResult = DialogResult.OK;
-                    this.Dispose();
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
         }
     }
 }

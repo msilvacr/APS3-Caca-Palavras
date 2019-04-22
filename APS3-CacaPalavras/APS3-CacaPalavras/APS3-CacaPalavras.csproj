@@ -48,7 +48,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>model1.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -65,8 +66,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controller\ModelFrmLogin.cs" />
-    <Compile Include="DataAccessObject\DaoUsuario.cs" />
+    <Compile Include="DataAccessObject\UsuarioDAO.cs" />
     <Compile Include="ModelConnection\DBConn.cs" />
+    <Compile Include="ModelControl\UsuarioControle.cs" />
     <Compile Include="Model\Historico.cs" />
     <Compile Include="Model\Jogo.cs" />
     <Compile Include="Model\Palavra.cs" />
@@ -88,6 +90,12 @@
     </Compile>
     <Compile Include="View\FormCriarConta.Designer.cs">
       <DependentUpon>FormCriarConta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\FormPrincipal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FormPrincipal.Designer.cs">
+      <DependentUpon>FormPrincipal.cs</DependentUpon>
     </Compile>
     <Compile Include="View\FrmJogo.cs">
       <SubType>Form</SubType>
@@ -118,6 +126,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\FormCriarConta.resx">
       <DependentUpon>FormCriarConta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FormPrincipal.resx">
+      <DependentUpon>FormPrincipal.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\FrmJogo.resx">
       <DependentUpon>FrmJogo.cs</DependentUpon>
@@ -166,7 +177,6 @@
     <Content Include="Images\ico\model7.ico" />
     <Content Include="Images\ico\model8.ico" />
     <Content Include="Images\ico\model9.ico" />
-    <Content Include="model1.ico" />
     <None Include="Resources\model14.png" />
     <None Include="Resources\model13.png" />
     <None Include="Resources\model12.png" />

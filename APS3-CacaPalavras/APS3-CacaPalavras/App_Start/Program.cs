@@ -1,4 +1,5 @@
-﻿using APS3_CacaPalavras.View;
+﻿using APS3_CacaPalavras.Model;
+using APS3_CacaPalavras.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,19 @@ namespace APS3_CacaPalavras
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormAcesso());
+            FormAcesso frmAcesso = new FormAcesso();
+
+            //validando dialogo do frmLogin
+            DialogResult dialogResultLogin = frmAcesso.ShowDialog();
+            
+            //verificando dialogo frmLogin
+            if(dialogResultLogin == DialogResult.OK)
+            {   //verificando se foi criado obj usuário sessão
+                if(UsuarioLogado.Logado == true && UsuarioLogado.User != null)
+                {   //iniciando aplicação 
+                    Application.Run(new FormPrincipal());
+                }                
+            }
         }
     }
 }
