@@ -19,6 +19,7 @@ namespace APS3_CacaPalavras.View
         }
 
         //eventos        
+        //btnLogin
         private void btnLogin_Click(object sender, EventArgs e)
         {
             iniciarLogin();
@@ -34,6 +35,7 @@ namespace APS3_CacaPalavras.View
             this.btnLogin.ForeColor = Color.FromArgb(255, 255, 255);
         }
         
+        //btnSair
         private void btnSair_Click(object sender, EventArgs e)
         {
             this.Dispose();
@@ -49,6 +51,7 @@ namespace APS3_CacaPalavras.View
             this.btnSair.BackColor = Color.FromArgb(217, 81, 51);
         }
 
+        //lblCadastrese
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             this.Visible = false;
@@ -65,6 +68,7 @@ namespace APS3_CacaPalavras.View
             labelCadastrese.Font = new Font(labelCadastrese.Font, FontStyle.Regular);
         }
 
+        //textboxes
         private void txtEmail_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -80,6 +84,8 @@ namespace APS3_CacaPalavras.View
             }
         }
 
+
+        //métodos
         private void iniciarLogin()
         {
             if (this.txtEmail.Text != string.Empty && this.txtSenha.Text != string.Empty)

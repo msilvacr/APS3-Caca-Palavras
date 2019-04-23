@@ -149,26 +149,12 @@ namespace APS3_CacaPalavras.View
             if (e.KeyData == Keys.Enter)
             {
                 this.avancarStepsFinal();
-                string result = UsuarioControle.CadastrarUsuario(user);
-
-                if (result == "Já existe um usuário cadastrado com este e-mail")
-                {
-                    MessageBox.Show(result, "Falha!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk, MessageBoxDefaultButton.Button1);
-                    this.voltarSteps2();
-                }
-                else
-                {
-                    MessageBox.Show("Usuário criado com sucesso!", "Sucesso!", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
-                    this.DialogResult = DialogResult.OK;
-                    this.Dispose();
-                }
             }
         }
 
         private void btnFinalizarSteps3_Click(object sender, EventArgs e)
         {
             this.avancarStepsFinal();
-            string result = UsuarioControle.CadastrarUsuario(user);
         }
         private void btnFinalizarSteps3_MouseEnter(object sender, EventArgs e)
         {
@@ -261,11 +247,24 @@ namespace APS3_CacaPalavras.View
                 {
                     //setando valores no obj Usuario
                     user.Senha = this.txtSenhaSteps3.Text;
+                    string result = UsuarioControle.CadastrarUsuario(user);
+
+                    if (result == "Já existe um usuário cadastrado com este e-mail")
+                    {
+                        MessageBox.Show(result, "Falha!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk, MessageBoxDefaultButton.Button1);
+                        this.voltarSteps2();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Usuário criado com sucesso!", "Sucesso!", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+                        this.DialogResult = DialogResult.OK;
+                        this.Dispose();
+                    }
                 }
                 else
                 {
                     MessageBox.Show("As senhas não conferem.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
-
+                    this.txtSenhaSteps3.Focus();
                 }
             }
             else

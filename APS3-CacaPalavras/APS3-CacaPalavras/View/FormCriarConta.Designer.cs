@@ -39,21 +39,21 @@
             this.btnCancelarSteps1 = new System.Windows.Forms.Button();
             this.txtTelefoneSteps1 = new System.Windows.Forms.MaskedTextBox();
             this.btnProximoSteps1 = new System.Windows.Forms.Button();
+            this.txtNomeSteps1 = new APS3_CacaPalavras.Util.TextboxMarcaDAgua();
             this.panelSteps2 = new System.Windows.Forms.Panel();
             this.labelEmailSteps2 = new System.Windows.Forms.Label();
             this.labelConfirmarEmailSteps2 = new System.Windows.Forms.Label();
             this.btnVoltarSteps2 = new System.Windows.Forms.Button();
+            this.txtEmailSteps2 = new APS3_CacaPalavras.Util.TextboxMarcaDAgua();
             this.btnProximoSteps2 = new System.Windows.Forms.Button();
+            this.txtConfirmarEmailSteps2 = new APS3_CacaPalavras.Util.TextboxMarcaDAgua();
             this.panelSteps3 = new System.Windows.Forms.Panel();
             this.labelSenhaSteps3 = new System.Windows.Forms.Label();
             this.labelConfirmarSenhaSteps3 = new System.Windows.Forms.Label();
             this.btnVoltarSteps3 = new System.Windows.Forms.Button();
-            this.btnFinalizarSteps3 = new System.Windows.Forms.Button();
             this.txtSenhaSteps3 = new APS3_CacaPalavras.Util.TextboxMarcaDAgua();
+            this.btnFinalizarSteps3 = new System.Windows.Forms.Button();
             this.txtConfirmarSenhaSteps3 = new APS3_CacaPalavras.Util.TextboxMarcaDAgua();
-            this.txtEmailSteps2 = new APS3_CacaPalavras.Util.TextboxMarcaDAgua();
-            this.txtConfirmarEmailSteps2 = new APS3_CacaPalavras.Util.TextboxMarcaDAgua();
-            this.txtNomeSteps1 = new APS3_CacaPalavras.Util.TextboxMarcaDAgua();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panelSteps1.SuspendLayout();
             this.panelSteps2.SuspendLayout();
@@ -178,6 +178,17 @@
             this.btnProximoSteps1.MouseEnter += new System.EventHandler(this.btnProximoSteps1_MouseEnter);
             this.btnProximoSteps1.MouseLeave += new System.EventHandler(this.btnProximoSteps1_MouseLeave);
             // 
+            // txtNomeSteps1
+            // 
+            this.txtNomeSteps1.ColorTextoVacio = System.Drawing.Color.Gray;
+            this.txtNomeSteps1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtNomeSteps1.Location = new System.Drawing.Point(9, 29);
+            this.txtNomeSteps1.Name = "txtNomeSteps1";
+            this.txtNomeSteps1.Size = new System.Drawing.Size(300, 29);
+            this.txtNomeSteps1.TabIndex = 1;
+            this.txtNomeSteps1.TextoVacio = "ex: Michael Jackson";
+            this.txtNomeSteps1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtNomeSteps1_KeyDown);
+            // 
             // panelSteps2
             // 
             this.panelSteps2.Controls.Add(this.labelEmailSteps2);
@@ -227,6 +238,17 @@
             this.btnVoltarSteps2.MouseEnter += new System.EventHandler(this.btnVoltarSteps2_MouseEnter);
             this.btnVoltarSteps2.MouseLeave += new System.EventHandler(this.btnVoltarSteps2_MouseLeave);
             // 
+            // txtEmailSteps2
+            // 
+            this.txtEmailSteps2.ColorTextoVacio = System.Drawing.Color.Gray;
+            this.txtEmailSteps2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtEmailSteps2.Location = new System.Drawing.Point(12, 29);
+            this.txtEmailSteps2.Name = "txtEmailSteps2";
+            this.txtEmailSteps2.Size = new System.Drawing.Size(300, 29);
+            this.txtEmailSteps2.TabIndex = 6;
+            this.txtEmailSteps2.TextoVacio = "ex: mJackson@gmail.com";
+            this.txtEmailSteps2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtEmailSteps2_KeyDown);
+            // 
             // btnProximoSteps2
             // 
             this.btnProximoSteps2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(65)))), ((int)(((byte)(84)))));
@@ -242,6 +264,17 @@
             this.btnProximoSteps2.Click += new System.EventHandler(this.btnProximoSteps2_Click);
             this.btnProximoSteps2.MouseEnter += new System.EventHandler(this.btnProximoSteps2_MouseEnter);
             this.btnProximoSteps2.MouseLeave += new System.EventHandler(this.btnProximoSteps2_MouseLeave);
+            // 
+            // txtConfirmarEmailSteps2
+            // 
+            this.txtConfirmarEmailSteps2.ColorTextoVacio = System.Drawing.Color.Gray;
+            this.txtConfirmarEmailSteps2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtConfirmarEmailSteps2.Location = new System.Drawing.Point(9, 88);
+            this.txtConfirmarEmailSteps2.Name = "txtConfirmarEmailSteps2";
+            this.txtConfirmarEmailSteps2.Size = new System.Drawing.Size(303, 29);
+            this.txtConfirmarEmailSteps2.TabIndex = 7;
+            this.txtConfirmarEmailSteps2.TextoVacio = "ex: mJackson@gmail.com";
+            this.txtConfirmarEmailSteps2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtConfirmarEmailSteps2_KeyDown);
             // 
             // panelSteps3
             // 
@@ -292,6 +325,18 @@
             this.btnVoltarSteps3.MouseEnter += new System.EventHandler(this.btnVoltarSteps3_MouseEnter);
             this.btnVoltarSteps3.MouseLeave += new System.EventHandler(this.btnVoltarSteps3_MouseLeave);
             // 
+            // txtSenhaSteps3
+            // 
+            this.txtSenhaSteps3.ColorTextoVacio = System.Drawing.Color.Gray;
+            this.txtSenhaSteps3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSenhaSteps3.Location = new System.Drawing.Point(12, 29);
+            this.txtSenhaSteps3.Name = "txtSenhaSteps3";
+            this.txtSenhaSteps3.PasswordChar = '*';
+            this.txtSenhaSteps3.Size = new System.Drawing.Size(300, 29);
+            this.txtSenhaSteps3.TabIndex = 10;
+            this.txtSenhaSteps3.TextoVacio = "Digite uma senha forte";
+            this.txtSenhaSteps3.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSenhaSteps3_KeyDown);
+            // 
             // btnFinalizarSteps3
             // 
             this.btnFinalizarSteps3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(65)))), ((int)(((byte)(84)))));
@@ -308,18 +353,6 @@
             this.btnFinalizarSteps3.MouseEnter += new System.EventHandler(this.btnFinalizarSteps3_MouseEnter);
             this.btnFinalizarSteps3.MouseLeave += new System.EventHandler(this.btnFinalizarSteps3_MouseLeave);
             // 
-            // txtSenhaSteps3
-            // 
-            this.txtSenhaSteps3.ColorTextoVacio = System.Drawing.Color.Gray;
-            this.txtSenhaSteps3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSenhaSteps3.Location = new System.Drawing.Point(12, 29);
-            this.txtSenhaSteps3.Name = "txtSenhaSteps3";
-            this.txtSenhaSteps3.PasswordChar = '*';
-            this.txtSenhaSteps3.Size = new System.Drawing.Size(300, 29);
-            this.txtSenhaSteps3.TabIndex = 10;
-            this.txtSenhaSteps3.TextoVacio = "Digite uma senha forte";
-            this.txtSenhaSteps3.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSenhaSteps3_KeyDown);
-            // 
             // txtConfirmarSenhaSteps3
             // 
             this.txtConfirmarSenhaSteps3.ColorTextoVacio = System.Drawing.Color.Gray;
@@ -331,39 +364,6 @@
             this.txtConfirmarSenhaSteps3.TabIndex = 11;
             this.txtConfirmarSenhaSteps3.TextoVacio = "confirme a senha novamente";
             this.txtConfirmarSenhaSteps3.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtConfirmarSenhaSteps3_KeyDown);
-            // 
-            // txtEmailSteps2
-            // 
-            this.txtEmailSteps2.ColorTextoVacio = System.Drawing.Color.Gray;
-            this.txtEmailSteps2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtEmailSteps2.Location = new System.Drawing.Point(12, 29);
-            this.txtEmailSteps2.Name = "txtEmailSteps2";
-            this.txtEmailSteps2.Size = new System.Drawing.Size(300, 29);
-            this.txtEmailSteps2.TabIndex = 6;
-            this.txtEmailSteps2.TextoVacio = "ex: mJackson@gmail.com";
-            this.txtEmailSteps2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtEmailSteps2_KeyDown);
-            // 
-            // txtConfirmarEmailSteps2
-            // 
-            this.txtConfirmarEmailSteps2.ColorTextoVacio = System.Drawing.Color.Gray;
-            this.txtConfirmarEmailSteps2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtConfirmarEmailSteps2.Location = new System.Drawing.Point(9, 88);
-            this.txtConfirmarEmailSteps2.Name = "txtConfirmarEmailSteps2";
-            this.txtConfirmarEmailSteps2.Size = new System.Drawing.Size(303, 29);
-            this.txtConfirmarEmailSteps2.TabIndex = 7;
-            this.txtConfirmarEmailSteps2.TextoVacio = "ex: mJackson@gmail.com";
-            this.txtConfirmarEmailSteps2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtConfirmarEmailSteps2_KeyDown);
-            // 
-            // txtNomeSteps1
-            // 
-            this.txtNomeSteps1.ColorTextoVacio = System.Drawing.Color.Gray;
-            this.txtNomeSteps1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNomeSteps1.Location = new System.Drawing.Point(9, 29);
-            this.txtNomeSteps1.Name = "txtNomeSteps1";
-            this.txtNomeSteps1.Size = new System.Drawing.Size(300, 29);
-            this.txtNomeSteps1.TabIndex = 1;
-            this.txtNomeSteps1.TextoVacio = "ex: Michael Jackson";
-            this.txtNomeSteps1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtNomeSteps1_KeyDown);
             // 
             // FormCriarConta
             // 
@@ -380,7 +380,7 @@
             this.MaximizeBox = false;
             this.Name = "FormCriarConta";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Woopy! [Crie sua conta]";
+            this.Text = "Woopy! - Crie sua conta";
             this.Load += new System.EventHandler(this.FormCriarConta_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panelSteps1.ResumeLayout(false);

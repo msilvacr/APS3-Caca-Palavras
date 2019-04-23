@@ -157,7 +157,7 @@
             this.MaximizeBox = false;
             this.Name = "FormAcesso";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Woopy!";
+            this.Text = "Woopy! - Acesso";
             this.Load += new System.EventHandler(this.FormAcesso_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);

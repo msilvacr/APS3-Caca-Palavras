@@ -18,6 +18,20 @@ namespace APS3_CacaPalavras
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+
+
+            ///
+            ////
+            //FormPrincipal frm = new FormPrincipal();
+            //frm.ShowDialog();
+            ////
+            ///
+
+
+
+
+            //criando tela de acesso
             FormAcesso frmAcesso = new FormAcesso();
 
             //validando dialogo do frmLogin
