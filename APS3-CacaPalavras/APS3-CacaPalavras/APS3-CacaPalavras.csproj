@@ -69,7 +69,8 @@
     <Compile Include="Controller\ModelFrmLogin.cs" />
     <Compile Include="DataAccessObject\UsuarioDAO.cs" />
     <Compile Include="ModelConnection\DBConn.cs" />
-    <Compile Include="ModelControl\UsuarioControle.cs" />
+    <Compile Include="ModelControl\ControleFormPrincipal.cs" />
+    <Compile Include="ModelControl\ControleUsuario.cs" />
     <Compile Include="Model\Historico.cs" />
     <Compile Include="Model\Jogo.cs" />
     <Compile Include="Model\Palavra.cs" />
@@ -92,23 +93,29 @@
     <Compile Include="View\FormCriarConta.Designer.cs">
       <DependentUpon>FormCriarConta.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\FormPrincipal.cs">
+    <Compile Include="View\FormDificuldade.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\FormPrincipal.Designer.cs">
-      <DependentUpon>FormPrincipal.cs</DependentUpon>
+    <Compile Include="View\FormDificuldade.Designer.cs">
+      <DependentUpon>FormDificuldade.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\FrmJogo.cs">
+    <Compile Include="View\FormTelaPrincipal.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\FrmJogo.Designer.cs">
-      <DependentUpon>FrmJogo.cs</DependentUpon>
+    <Compile Include="View\FormTelaPrincipal.Designer.cs">
+      <DependentUpon>FormTelaPrincipal.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\FrmLogin.cs">
+    <Compile Include="View\FormJogo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\FrmLogin.Designer.cs">
-      <DependentUpon>FrmLogin.cs</DependentUpon>
+    <Compile Include="View\FormJogo.Designer.cs">
+      <DependentUpon>FormJogo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\FormLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FormLogin.Designer.cs">
+      <DependentUpon>FormLogin.cs</DependentUpon>
     </Compile>
     <Compile Include="App_Start\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -128,14 +135,17 @@
     <EmbeddedResource Include="View\FormCriarConta.resx">
       <DependentUpon>FormCriarConta.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\FormPrincipal.resx">
-      <DependentUpon>FormPrincipal.cs</DependentUpon>
+    <EmbeddedResource Include="View\FormDificuldade.resx">
+      <DependentUpon>FormDificuldade.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\FrmJogo.resx">
-      <DependentUpon>FrmJogo.cs</DependentUpon>
+    <EmbeddedResource Include="View\FormTelaPrincipal.resx">
+      <DependentUpon>FormTelaPrincipal.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\frmLogin.resx">
-      <DependentUpon>FrmLogin.cs</DependentUpon>
+    <EmbeddedResource Include="View\FormJogo.resx">
+      <DependentUpon>FormJogo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FormLogin.resx">
+      <DependentUpon>FormLogin.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

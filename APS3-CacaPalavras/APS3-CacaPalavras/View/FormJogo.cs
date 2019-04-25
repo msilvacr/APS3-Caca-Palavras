@@ -10,14 +10,28 @@ using System.Windows.Forms;
 
 namespace APS3_CacaPalavras.View
 {
-    public partial class FrmJogo : Form
+    public partial class FormJogo : Form
     {
-        public FrmJogo()
+        public FormJogo()
         {
             InitializeComponent();
         }
 
         private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void FrmJogo_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void IniciarJogo()
+        {
+
+        }
+        private void CriarJogo()
         {
 
         }

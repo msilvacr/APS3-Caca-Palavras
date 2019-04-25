@@ -1,6 +1,6 @@
 ﻿namespace APS3_CacaPalavras.View
 {
-    partial class FormPrincipal
+    partial class FormTelaPrincipal
     {
         /// <summary>
         /// Required designer variable.
@@ -28,18 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormPrincipal));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormTelaPrincipal));
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnSair = new System.Windows.Forms.Button();
             this.btnNovoJogo = new System.Windows.Forms.Button();
             this.btnContinuar = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.históricoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.rankingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.usuárioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.alterarSenhaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.alterarInformaçõesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.históricoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rankingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -82,6 +82,7 @@
             this.btnNovoJogo.TabIndex = 11;
             this.btnNovoJogo.Text = "Novo Jogo";
             this.btnNovoJogo.UseVisualStyleBackColor = false;
+            this.btnNovoJogo.Click += new System.EventHandler(this.btnNovoJogo_Click);
             this.btnNovoJogo.MouseEnter += new System.EventHandler(this.btnNovoJogo_MouseEnter);
             this.btnNovoJogo.MouseLeave += new System.EventHandler(this.btnNovoJogo_MouseLeave_1);
             // 
@@ -110,17 +111,26 @@
             this.label2.TabIndex = 17;
             this.label2.Text = "Woopy!";
             // 
-            // menuStrip1
+            // usuárioToolStripMenuItem
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.usuárioToolStripMenuItem,
-            this.históricoToolStripMenuItem,
-            this.rankingToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(353, 24);
-            this.menuStrip1.TabIndex = 18;
-            this.menuStrip1.Text = "menuStrip1";
+            this.usuárioToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.alterarSenhaToolStripMenuItem,
+            this.alterarInformaçõesToolStripMenuItem});
+            this.usuárioToolStripMenuItem.Name = "usuárioToolStripMenuItem";
+            this.usuárioToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
+            this.usuárioToolStripMenuItem.Text = "Usuário";
+            // 
+            // alterarSenhaToolStripMenuItem
+            // 
+            this.alterarSenhaToolStripMenuItem.Name = "alterarSenhaToolStripMenuItem";
+            this.alterarSenhaToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.alterarSenhaToolStripMenuItem.Text = "Alterar senha";
+            // 
+            // alterarInformaçõesToolStripMenuItem
+            // 
+            this.alterarInformaçõesToolStripMenuItem.Name = "alterarInformaçõesToolStripMenuItem";
+            this.alterarInformaçõesToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.alterarInformaçõesToolStripMenuItem.Text = "Alterar informações";
             // 
             // históricoToolStripMenuItem
             // 
@@ -134,26 +144,17 @@
             this.rankingToolStripMenuItem.Size = new System.Drawing.Size(62, 20);
             this.rankingToolStripMenuItem.Text = "Ranking";
             // 
-            // usuárioToolStripMenuItem
+            // menuStrip1
             // 
-            this.usuárioToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.alterarSenhaToolStripMenuItem,
-            this.alterarInformaçõesToolStripMenuItem});
-            this.usuárioToolStripMenuItem.Name = "usuárioToolStripMenuItem";
-            this.usuárioToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
-            this.usuárioToolStripMenuItem.Text = "Usuário";
-            // 
-            // alterarSenhaToolStripMenuItem
-            // 
-            this.alterarSenhaToolStripMenuItem.Name = "alterarSenhaToolStripMenuItem";
-            this.alterarSenhaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.alterarSenhaToolStripMenuItem.Text = "Alterar senha";
-            // 
-            // alterarInformaçõesToolStripMenuItem
-            // 
-            this.alterarInformaçõesToolStripMenuItem.Name = "alterarInformaçõesToolStripMenuItem";
-            this.alterarInformaçõesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.alterarInformaçõesToolStripMenuItem.Text = "Alterar informações";
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.usuárioToolStripMenuItem,
+            this.históricoToolStripMenuItem,
+            this.rankingToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(353, 24);
+            this.menuStrip1.TabIndex = 18;
+            this.menuStrip1.Text = "menuStrip1";
             // 
             // FormPrincipal
             // 
@@ -166,6 +167,7 @@
             this.Controls.Add(this.btnSair);
             this.Controls.Add(this.btnNovoJogo);
             this.Controls.Add(this.menuStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
@@ -189,11 +191,11 @@
         private System.Windows.Forms.Button btnNovoJogo;
         private System.Windows.Forms.Button btnContinuar;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem históricoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem rankingToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem usuárioToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem alterarSenhaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem alterarInformaçõesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem históricoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem rankingToolStripMenuItem;
+        private System.Windows.Forms.MenuStrip menuStrip1;
     }
 }

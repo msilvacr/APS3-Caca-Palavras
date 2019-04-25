@@ -1,4 +1,5 @@
 ﻿using APS3_CacaPalavras.Model;
+using APS3_CacaPalavras.ModelControl;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,9 +12,9 @@ using System.Windows.Forms;
 
 namespace APS3_CacaPalavras.View
 {
-    public partial class FormPrincipal : Form
+    public partial class FormTelaPrincipal : Form
     {
-        public FormPrincipal()
+        public FormTelaPrincipal()
         {
             InitializeComponent();
         }
@@ -38,6 +39,12 @@ namespace APS3_CacaPalavras.View
         }
 
         //btnNovoJogo
+        private void btnNovoJogo_Click(object sender, EventArgs e)
+        {
+            this.Visible = false;
+            FormDificuldade formDificuldade = new FormDificuldade();
+            formDificuldade.ShowDialog();
+        }
         private void btnNovoJogo_MouseEnter(object sender, EventArgs e)
         {
             this.btnNovoJogo.BackColor = Color.FromArgb(255, 255, 255);
@@ -66,12 +73,6 @@ namespace APS3_CacaPalavras.View
         }
 
 
-        //toolStripSair
-        private void sairToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            this.Finalizar();
-        }
-
         //métodos
         private void Finalizar()
         {
@@ -85,7 +86,21 @@ namespace APS3_CacaPalavras.View
         
         private void CarregarForm()
         {
+            //inserindo nome do usuário logado ao text do form
             this.Text = "Woopy! - Welcome " + UsuarioLogado.User.Nome;
+
+            //verificando se o usuário logado possui jogo em aberto
+            if (ControleFormPrincipal.ValidarJogoNaoFinalizado(UsuarioLogado.User.IdUsuario))
+            {
+                this.btnContinuar.Enabled = true;
+                this.btnContinuar.ForeColor = Color.White;
+            }
+            else
+            {
+                this.btnContinuar.Enabled = false;
+                this.btnContinuar.ForeColor = Color.White;
+            }
         }
+
     }
 } 
