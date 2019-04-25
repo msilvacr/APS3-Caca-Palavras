@@ -30,12 +30,12 @@
         {
             this.SuspendLayout();
             // 
-            // FrmJogo
+            // FormJogo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Name = "FrmJogo";
+            this.ClientSize = new System.Drawing.Size(841, 474);
+            this.Name = "FormJogo";
             this.Text = "FrmJogo";
             this.Load += new System.EventHandler(this.FrmJogo_Load);
             this.ResumeLayout(false);

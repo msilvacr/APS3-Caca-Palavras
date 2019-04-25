@@ -26,7 +26,7 @@ namespace APS3_CacaPalavras
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-            this.PopularTabelaFormatarTabela();
+            PopularTabelaFormatarTabela();
         }
         private void PopularTabelaFormatarTabela()
         {

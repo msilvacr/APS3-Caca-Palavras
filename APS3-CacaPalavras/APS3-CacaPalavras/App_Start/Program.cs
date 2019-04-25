@@ -15,7 +15,9 @@ namespace APS3_CacaPalavras
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            
+
+
+            APS3_CacaPalavras.View.FormLogin frm = new View.FormLogin();
             //criando tela de acesso
             FormAcesso frmAcesso = new FormAcesso();
 
