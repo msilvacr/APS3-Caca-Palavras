@@ -17,7 +17,23 @@ namespace APS3_CacaPalavras
             Application.SetCompatibleTextRenderingDefault(false);
 
 
-            APS3_CacaPalavras.View.FormLogin frm = new View.FormLogin();
+            FormJogo jogo = new FormJogo();
+            jogo.ShowDialog();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            /*
             //criando tela de acesso
             FormAcesso frmAcesso = new FormAcesso();
 
@@ -32,6 +48,7 @@ namespace APS3_CacaPalavras
                     Application.Run(new FormTelaPrincipal());
                 }                
             }
+            */
         }
     }
 }
