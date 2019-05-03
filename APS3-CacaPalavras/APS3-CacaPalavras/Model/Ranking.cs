@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace APS3_CacaPalavras.Model
 {
-    class Ranking
+    public class Ranking
     {
     }
 }

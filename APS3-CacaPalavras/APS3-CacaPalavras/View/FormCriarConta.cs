@@ -247,7 +247,7 @@ namespace APS3_CacaPalavras.View
                 {
                     //setando valores no obj Usuario
                     user.Senha = this.txtSenhaSteps3.Text;
-                    string result = UsuarioControle.CadastrarUsuario(user);
+                    string result = Usuario.CadastrarUsuario(user);
 
                     if (result == "Já existe um usuário cadastrado com este e-mail")
                     {

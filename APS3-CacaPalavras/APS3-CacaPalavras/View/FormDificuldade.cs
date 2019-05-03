@@ -75,10 +75,8 @@ namespace APS3_CacaPalavras.View
         //métodos
         private void Selecao(int dfc)
         {
-            ControleFormPrincipal.Dificuldade = dfc;
+            FormTelaPrincipal.dificuldade = dfc;
             this.Dispose();
         }
-
-
     }
 }

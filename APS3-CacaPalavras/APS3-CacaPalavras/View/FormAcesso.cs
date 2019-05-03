@@ -90,12 +90,12 @@ namespace APS3_CacaPalavras.View
         {
             if (this.txtEmail.Text != string.Empty && this.txtSenha.Text != string.Empty)
             {
-                string resultLogin = UsuarioControle.AutenticarUsuario(this.txtEmail.Text, this.txtSenha.Text);
+                string resultLogin = Usuario.AutenticarUsuario(this.txtEmail.Text, this.txtSenha.Text);
 
 
                 if (resultLogin == "Login efetuado com sucesso!")
                 {
-                    UsuarioControle.LogarUsuario(this.txtEmail.Text, this.txtSenha.Text);
+                    Usuario.LogarUsuario(this.txtEmail.Text, this.txtSenha.Text);
                     MessageBox.Show(resultLogin, "Sucesso!", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
                     this.DialogResult = DialogResult.OK;
                     this.Dispose();

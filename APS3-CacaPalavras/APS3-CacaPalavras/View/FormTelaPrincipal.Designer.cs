@@ -98,6 +98,7 @@
             this.btnContinuar.TabIndex = 16;
             this.btnContinuar.Text = "Continuar";
             this.btnContinuar.UseVisualStyleBackColor = false;
+            this.btnContinuar.Click += new System.EventHandler(this.btnContinuar_Click);
             this.btnContinuar.MouseEnter += new System.EventHandler(this.btnContinuar_MouseEnter);
             this.btnContinuar.MouseLeave += new System.EventHandler(this.btnContinuar_MouseLeave);
             // 
@@ -156,7 +157,7 @@
             this.menuStrip1.TabIndex = 18;
             this.menuStrip1.Text = "menuStrip1";
             // 
-            // FormPrincipal
+            // FormTelaPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -172,7 +173,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "FormPrincipal";
+            this.Name = "FormTelaPrincipal";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Woopy! - Tela principal";
             this.Load += new System.EventHandler(this.FormPrincipal_Load);

@@ -21,19 +21,6 @@ namespace APS3_CacaPalavras
             jogo.ShowDialog();
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-            /*
             //criando tela de acesso
             FormAcesso frmAcesso = new FormAcesso();
 
@@ -48,7 +35,6 @@ namespace APS3_CacaPalavras
                     Application.Run(new FormTelaPrincipal());
                 }                
             }
-            */
         }
     }
 }

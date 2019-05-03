@@ -21,12 +21,19 @@ namespace APS3_CacaPalavras.View
 
         private void FormPrincipal_Load(object sender, EventArgs e)
         {
-            CarregarForm();
+            IniciarForm();
         }
+
+        //atributos
+        public static int dificuldade = 0;
 
         //eventos 
 
         //btnContinuar
+        private void btnContinuar_Click(object sender, EventArgs e)
+        {
+            this.ContinuarJogo();
+        }
         private void btnContinuar_MouseEnter(object sender, EventArgs e)
         {
             this.btnContinuar.ForeColor = Color.FromArgb(58, 65, 84);
@@ -41,9 +48,7 @@ namespace APS3_CacaPalavras.View
         //btnNovoJogo
         private void btnNovoJogo_Click(object sender, EventArgs e)
         {
-            this.Visible = false;
-            FormDificuldade formDificuldade = new FormDificuldade();
-            formDificuldade.ShowDialog();
+            this.NovoJogo();
         }
         private void btnNovoJogo_MouseEnter(object sender, EventArgs e)
         {
@@ -74,23 +79,14 @@ namespace APS3_CacaPalavras.View
 
 
         //métodos
-        private void Finalizar()
-        {
-            DialogResult dialogResult = MessageBox.Show("Tem certeza que deseja sair?", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
 
-            if(dialogResult == DialogResult.Yes)
-            {
-                this.Dispose();
-            }
-        }   
-        
-        private void CarregarForm()
+        private void IniciarForm()
         {
             //inserindo nome do usuário logado ao text do form
             this.Text = "Woopy! - Welcome " + UsuarioLogado.User.Nome;
 
             //verificando se o usuário logado possui jogo em aberto
-            if (ControleFormPrincipal.ValidarJogoNaoFinalizado(UsuarioLogado.User.IdUsuario))
+            if (TelaPrincipal.ValidarJogoNaoFinalizado(UsuarioLogado.User.IdUsuario))
             {
                 this.btnContinuar.Enabled = true;
                 this.btnContinuar.ForeColor = Color.White;
@@ -102,5 +98,54 @@ namespace APS3_CacaPalavras.View
             }
         }
 
+        private void ContinuarJogo()
+        {
+            JogoExecucao.jogo.User = UsuarioLogado.User;
+
+        }
+
+        private void NovoJogo()
+        {
+            //Criando novo jogo
+            Jogo jogo = new Jogo();
+
+            //adicionando usuário
+            jogo.User = UsuarioLogado.User;
+
+            //recebendo dificuldade do novo jogo
+            this.Visible = false;
+            FormDificuldade formDificuldade = new FormDificuldade();
+            formDificuldade.ShowDialog();
+
+            if(dificuldade != 0)
+            {
+                //adicionando dificuldade
+                jogo.NivelDificuldade = FormTelaPrincipal.dificuldade;
+
+                //adicionando obj jogo à classe estática de controle
+                JogoExecucao.jogo = jogo;
+
+
+                //criando novo jogo
+                Model.NovoJogo.novoJogo();
+
+                //chamando formJogo
+                FormJogo formJogo = new FormJogo();
+
+                this.Visible = false;
+
+                formJogo.ShowDialog();
+            }
+        }
+
+        private void Finalizar()
+        {
+            DialogResult dialogResult = MessageBox.Show("Tem certeza que deseja sair?", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
+
+            if (dialogResult == DialogResult.Yes)
+            {
+                this.Dispose();
+            }
+        }
     }
 } 

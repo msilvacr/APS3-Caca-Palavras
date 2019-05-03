@@ -66,11 +66,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controller\ModelFrmLogin.cs" />
     <Compile Include="DataAccessObject\UsuarioDAO.cs" />
     <Compile Include="ModelConnection\DBConn.cs" />
-    <Compile Include="ModelControl\ControleFormPrincipal.cs" />
-    <Compile Include="ModelControl\ControleUsuario.cs" />
+    <Compile Include="Model\TelaPrincipal.cs" />
     <Compile Include="Model\Historico.cs" />
     <Compile Include="Model\Jogo.cs" />
     <Compile Include="Model\Palavra.cs" />
@@ -160,7 +158,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Controller\" />
+  </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
       <Visible>False</Visible>

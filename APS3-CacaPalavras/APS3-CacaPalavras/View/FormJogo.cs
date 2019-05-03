@@ -21,9 +21,8 @@ namespace APS3_CacaPalavras.View
 
         private void FrmJogo_Load(object sender, EventArgs e)
         {
-            this.PopularTabelaFormatarTabela();
+            this.PopularrFormatarTabela();
         }
-
         private void IniciarJogo()
         {
 
@@ -33,102 +32,214 @@ namespace APS3_CacaPalavras.View
 
         }
 
-
-
-
         /// <summary>
-        /// TESTES ABAIXO
+        /// CONFIG MOV
         /// </summary>
 
+        private int[] firstCell = null; //armazena a primeira posição na tabela que foi selecionada [x,y]
+        private int[] distCell = null; //armazena [x, y] da celula mais distante da firstCell
+        private int[] distMovCell = null; //armazena a celula mais distante no eixo x, y, ou em diagonal, em relação a firstCell
+        private string movSentido = null; //armazena a orientação do movimento {V, H, D}
 
-        public int i = 0; //contador de eventos
-        public int[] firstCell = null; //armazena a primeira posição na tabela que foi selecionada [x,y]
-        int[] auxCell = null; //armazena [x, y] da celula mais distante da firstCell
-
-        private void PopularTabelaFormatarTabela()
+        //métodos
+        private void PopularrFormatarTabela()
         {
-
-            int size = 30;
-            dataGridJogo.RowTemplate.Height = size;
-
-            for (int p = 0; p < 14; p++)
+            int qtdXY = 13;
+            //inserindo colunas
+            for (int p = 0; p < qtdXY; p++)
             {
                 dataGridJogo.Columns.Add(Convert.ToString(p), "");
-                dataGridJogo.Columns[Convert.ToInt32(p)].Width = size;
-                dataGridJogo.Columns[Convert.ToInt32(p)].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-                dataGridJogo.Columns[Convert.ToInt32(p)].Resizable = DataGridViewTriState.False;
             }
-            //popular
-            for (int p = 0; p < 14; p++)
+            //inserindo linhas
+            for (int p = 0; p < qtdXY; p++)
             {
                 dataGridJogo.Rows.Add();
             }
+            //inserindo valor às celulas
             for (int i = 0; i < dataGridJogo.Rows.Count; ++i)
             {
                 for (int c = 0; c < dataGridJogo.Columns.Count; c++)
                 {
-                    dataGridJogo.Rows[i].Cells[c].Value = string.Format("{0}, {1}", i, c);
+                    dataGridJogo[i, c].Value = string.Format("{0}, {1}", i, c);
                 }
-
             }
+            //definindo todas as celulas como readOnly
+            for (int i = 0; i < dataGridJogo.Rows.Count; ++i)
+            {
+                for (int c = 0; c < dataGridJogo.Columns.Count; c++)
+                {
+                    dataGridJogo[i, c].ReadOnly = true;
+                }
+            }
+            //redimensionar colunas
+            foreach (DataGridViewColumn c in dataGridJogo.Columns)
+                c.Width = dataGridJogo.Width / dataGridJogo.Columns.Count;
 
-            //formatar
-            dataGridJogo.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
-            dataGridJogo.AllowUserToResizeRows = false;
+            foreach (DataGridViewRow r in dataGridJogo.Rows)
+                r.Height = dataGridJogo.Height / dataGridJogo.Rows.Count;
+
+
         }
 
-
-        private void dataGridJogo_SelectionChanged(object sender, EventArgs e)
+        private void IdentificarMov()
         {
-            this.Text = "";
-            //contador de celulas verificadas no foreach
-            int teste = 0;
-
-
             //verificando se já foi definida a celula inicial
-            if (dataGridJogo.SelectedCells.Count == 1)
-            {
-                firstCell = new int[] { Convert.ToInt16(dataGridJogo.CurrentCell.RowIndex), Convert.ToInt16(dataGridJogo.CurrentCell.ColumnIndex) };
-            }
-
-            else
+            if (firstCell != null)
+            
             {
                 //definindo a firstCell como celula aux para verificacão
-                auxCell = new int[2] { firstCell[0], firstCell[1] };
+                distMovCell = new int[2] { firstCell[0], firstCell[1] };
 
                 //loop nas celulas selecionadas para encontrar celula mais distante 
                 foreach (DataGridViewCell celulaVolta in dataGridJogo.SelectedCells)
                 {
-                    teste++;
                     int distX = Math.Abs(celulaVolta.RowIndex - firstCell[0]);
-                    int distXAnt = Math.Abs(auxCell[0] - firstCell[0]);
+                    int distXAnt = Math.Abs(distMovCell[0] - firstCell[0]);
 
                     int distY = Math.Abs(celulaVolta.ColumnIndex - firstCell[1]);
-                    int distYAnt = Math.Abs(auxCell[1] - firstCell[1]);
+                    int distYAnt = Math.Abs(distMovCell[1] - firstCell[1]);
 
                     //Verificando se a distância para x é maior e se a distância para y é maior ou igual a da celula selecionada atualmente, em relação à firstCell
                     if (distX > distXAnt && distX > distYAnt && celulaVolta.ColumnIndex == firstCell[1])
                     {
-                        auxCell[0] = celulaVolta.RowIndex;
-                        auxCell[1] = celulaVolta.ColumnIndex;
-
-                        this.Text = string.Format("[{0}, {1}] - Vertical", auxCell[0], auxCell[1]);
+                        distMovCell[0] = celulaVolta.RowIndex;
+                        distMovCell[1] = celulaVolta.ColumnIndex;
+                        movSentido = "V";
                     }
-                    if (distY > distYAnt && distY > distXAnt && celulaVolta.RowIndex == firstCell[0])
+                    else if (distY > distYAnt && distY > distXAnt && celulaVolta.RowIndex == firstCell[0])
                     {
-                        auxCell[0] = celulaVolta.RowIndex;
-                        auxCell[1] = celulaVolta.ColumnIndex;
-
-                        this.Text = string.Format("[{0}, {1}] - Horizontal", auxCell[0], auxCell[1]);
+                        distMovCell[0] = celulaVolta.RowIndex;
+                        distMovCell[1] = celulaVolta.ColumnIndex;
+                        movSentido = "H";
                     }
-                    if (distX >= distXAnt && distY >= distYAnt && distX == distY)
+                    else if (distX >= distXAnt && distY >= distYAnt && distX == distY)
                     {
-                        auxCell[0] = celulaVolta.RowIndex;
-                        auxCell[1] = celulaVolta.ColumnIndex;
-
-                        this.Text = string.Format("[{0}, {1}] - Diagonal", auxCell[0], auxCell[1]);
+                        distMovCell[0] = celulaVolta.RowIndex;
+                        distMovCell[1] = celulaVolta.ColumnIndex;
+                        movSentido = "D";
                     }
                 }
+            }
+        }
+        private void SelecionarCelulasMovOrientacao()
+        {
+            if(movSentido == "H")
+            {
+                for (int i = 0; i < Math.Abs(firstCell[1] - distMovCell[1]); i++)
+                {
+                    if (firstCell[1] - distMovCell[1] < 0)
+                    {
+                        dataGridJogo.Rows[firstCell[0]].Cells[firstCell[1] + i].Selected = true;
+                    }
+                    else
+                    {
+                        dataGridJogo.Rows[firstCell[0]].Cells[firstCell[1] - i].Selected = true;
+                    }
+                }
+            }
+            else if (movSentido == "V")
+            {
+                for (int i = 0; i < Math.Abs(firstCell[0] - distMovCell[0]); i++)
+                {
+                    if (firstCell[0] - distMovCell[0] < 0)
+                    {
+                        dataGridJogo.Rows[firstCell[0] + i].Cells[firstCell[1]].Selected = true;
+                    }
+                    else
+                    {
+                        dataGridJogo.Rows[firstCell[0] - i].Cells[firstCell[1]].Selected = true;
+                    }
+                }
+            }
+            else if (movSentido == "D")
+            {
+                int auxX = distMovCell[0] - firstCell[0];
+                int auxY = distMovCell[1] - firstCell[1];
+
+                int aux = Math.Abs(firstCell[0] - distMovCell[0]);
+
+
+                for (int i = 0; i < aux; i++)
+                {
+                    if (auxX < 0 && auxY > 0)// /\  >>
+                    {
+                       dataGridJogo.Rows[firstCell[0] - i].Cells[firstCell[1] + i].Selected = true;
+                    }
+                    else if (auxX < 0 && auxY < 0)//   /\  <<
+                    {
+                        dataGridJogo.Rows[firstCell[0] - i].Cells[firstCell[1] - i].Selected = true;
+                    }
+                    else if (auxX > 0 && auxY > 0)//    \/  >>
+                    {
+                        dataGridJogo.Rows[firstCell[0] + i].Cells[firstCell[1] + i].Selected = true;
+                    }
+                    else if (auxX > 0 && auxY < 0)//   \/  <<
+                    {
+                        dataGridJogo.Rows[firstCell[0] + i].Cells[firstCell[1] - i].Selected = true;
+                    }
+                }
+                //MessageBox.Show("DEU ALGO ERRADO");
+            }
+        }
+        private void DeselecionarCelulasNaoMovOrientacao()
+        {
+            foreach (DataGridViewCell cell in dataGridJogo.SelectedCells)
+            {
+                if (movSentido == "D")
+                {
+
+                    int cellX = Math.Abs(cell.RowIndex - firstCell[0]);
+                    int cellY = Math.Abs(cell.ColumnIndex - firstCell[1]);
+                    if (cellX != cellY)
+                    {
+                        cell.Selected = false;
+                    }
+                }
+                else if (movSentido == "V")
+                {
+                    if (cell.ColumnIndex != firstCell[1])
+                        cell.Selected = false;
+                }
+                else if (movSentido == "H")
+                {
+                    if (cell.RowIndex != firstCell[0])
+                        cell.Selected = false;
+                }
+            }
+
+        }
+
+        //eventos
+        private void dataGridJogo_SelectionChanged(object sender, EventArgs e)
+        {
+            this.IdentificarMov();
+            this.SelecionarCelulasMovOrientacao();
+            this.DeselecionarCelulasNaoMovOrientacao();
+        }
+
+        private void dataGridJogo_CellMouseMove(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                if (firstCell != null)
+                {
+                    distCell = new int[2] { e.RowIndex, e.ColumnIndex };
+                }
+            }
+        }
+
+        private void dataGridJogo_MouseUp(object sender, MouseEventArgs e)
+        {
+            firstCell = null;
+            distCell = null;
+            distMovCell = null;
+            movSentido = null;
+        }
+        private void dataGridJogo_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (firstCell == null)
+            {
+                firstCell = new int[2] { e.RowIndex, e.ColumnIndex };
             }
         }
     }
