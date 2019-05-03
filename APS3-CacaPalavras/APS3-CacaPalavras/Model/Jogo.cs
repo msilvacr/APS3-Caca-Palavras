@@ -8,6 +8,10 @@ namespace APS3_CacaPalavras.Model
 {
     public class Jogo
     {
+        //DEFININDO CONSTANTES DE QTD DE PALAVRAS E TAMANHO DE MATRIZ POR NIVEL DE DIFICULDADE { 0 = FACIL, 1 = MÉDIO, 2 = DIFICIL, 3 = INSANO }
+        private static readonly int[] qtdPalavrasPorDificuldade = new int[4] { 8, 10, 12, 14 };
+        private static readonly int[] tamanhoMatrizPorDificuldade = new int[4] { 14, 16, 18, 22 };
+
         //atributos
         private int idJogo;
         private Usuario user;
@@ -28,7 +32,12 @@ namespace APS3_CacaPalavras.Model
         public Boolean StatusJogo { get { return statusJogo; } set { statusJogo = value; } }
         public TimeSpan DuracaoJogo { get { return duracaoJogo; } set { duracaoJogo = value; } }
 
-
+        public static int QtdPalavrasPorDificuldade(int i){
+            return qtdPalavrasPorDificuldade[i];
+        }
+        public static int TamanhoMatrizPorDificuldade(int i){
+            return tamanhoMatrizPorDificuldade[i];
+        }
     }
 
     public static class JogoExecucao
@@ -42,45 +51,8 @@ namespace APS3_CacaPalavras.Model
         //NOVO JOGO
         public static void novoJogo()
         {
-            //aqui é definido a quantidade e o tamanho das palavras que estarão presentes no jogo
-            carregarPalavrasJogo(definirQtdPalavras(), definirTamanhoMatriz());
-        }
-
-        //definindo a quantidade de palavras estarão presentes no jogo de acordo com o nível de dificuldade
-        private static int definirQtdPalavras()
-        {
-            switch (JogoExecucao.jogo.NivelDificuldade)
-            {
-                case 3: //dificil
-                    return 10;
-                case 2: //médio
-                    return 10;
-                case 1: //facil
-                    return 8;
-                default://aconteceu algum erro
-                    MessageBox.Show("Alguma coisa deu errado no dificuldade do jogo... valor inconsistente");
-                    return 0;
-            }
-        }
-
-        //criando obj matriz e definindo seu tamanho de acordo com o nível de dificuldade
-        private static int definirTamanhoMatriz()
-        {
-            if (JogoExecucao.jogo.NivelDificuldade == 3)
-            {
-                JogoExecucao.jogo.MatrizJogo = new string[18, 18];
-                return 18;
-            }       //médio
-            else if (JogoExecucao.jogo.NivelDificuldade == 2)
-            {
-                JogoExecucao.jogo.MatrizJogo = new string[14, 14];
-                return 14;
-            }       //fácil
-            else
-            {
-                JogoExecucao.jogo.MatrizJogo = new string[10, 10];
-                return 10;
-            }
+            //passando valor referente as const qtdPalavrasPorDificuldade, tamanhoMatrizPorDificuldade
+            carregarPalavrasJogo(Jogo.QtdPalavrasPorDificuldade(JogoExecucao.jogo.NivelDificuldade), Jogo.TamanhoMatrizPorDificuldade(JogoExecucao.jogo.NivelDificuldade)); ;
         }
 
         //Sorteia as palavras que estarão presentes no jogo
@@ -99,35 +71,51 @@ namespace APS3_CacaPalavras.Model
 
             for (int i = 0; i < quantidadePalavras; i++)
             {
-                Palavra palavra = new Palavra();
-
-                palavra.IdPalavra = dataTable.Rows[i].Field<Int32>(0);
-                palavra.TextoPalavra = dataTable.Rows[i].Field<string>(1);
-
+                Palavra palavra = new Palavra(dataTable.Rows[i].Field<Int32>(0), dataTable.Rows[i].Field<string>(1));
                 palavras[i] = palavra;
             }
-            JogoExecucao.jogo.Palavras = ordenarPalavrasPorTamanho(palavras);
+            //executando ordenador de palavras com crescente = false
+            JogoExecucao.jogo.Palavras = ordenarPalavrasPorTamanho(palavras, false);
         }
 
         //ordenador de obj do tipo palavra a partir do tamanho do TEXTO DA PALAVRA
-        private static Palavra[] ordenarPalavrasPorTamanho(Palavra[] palavras)
+        private static Palavra[] ordenarPalavrasPorTamanho(Palavra[] palavras, bool crescente)
         {
+            //ORDENANDO EM ORDEM DECRESCENTE 
             for (int i = 0; i < palavras.Length; i++)
             {
                 for (int j = 0; j < palavras.Length; j++)
                 {
-                    if (palavras[i].TextoPalavra.Length > palavras[j].TextoPalavra.Length)
+                    //CASO CRESCENTE = TRUE
+                    if (crescente)
                     {
-                        //usando variavel aux e ordenando palavras
-                        Palavra aux = palavras[j];
+                        if (palavras[i].TextoPalavra.Length < palavras[j].TextoPalavra.Length)
+                        {
+                            //usando variavel aux e ordenando palavras
+                            Palavra aux = palavras[j];
 
-                        palavras[j] = palavras[i];
+                            palavras[j] = palavras[i];
 
-                        palavras[i] = aux;
+                            palavras[i] = aux;
+                        }
+                    }
+                    //CASO CRESCENTE != TRUE
+                    else
+                    {
+                        if (palavras[i].TextoPalavra.Length > palavras[j].TextoPalavra.Length)
+                        {
+                            //usando variavel aux e ordenando palavras
+                            Palavra aux = palavras[j];
+
+                            palavras[j] = palavras[i];
+
+                            palavras[i] = aux;
+                        }
                     }
                 }
             }
 
+            //VERIFICAR POSSÍVEIS ERROS
             for (int x = 0; x < palavras.Length; x++)
             {
                 MessageBox.Show(String.Format("{0}º = O tamanho da palavra é: {1}", x, palavras[x].TextoPalavra.Length));
@@ -136,7 +124,12 @@ namespace APS3_CacaPalavras.Model
             return palavras;
         }
 
-        private static void gerarMatriz()
+        private static void encaixarPalavrasMatriz(string[,] matriz, Palavra[] palavras)
+        {
+            
+        }
+
+        private static void preencherCelulasMatriz()
         {
 
         }

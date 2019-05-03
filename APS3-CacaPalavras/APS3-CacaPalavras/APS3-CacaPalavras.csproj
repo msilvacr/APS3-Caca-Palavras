@@ -68,6 +68,7 @@
   <ItemGroup>
     <Compile Include="DataAccessObject\UsuarioDAO.cs" />
     <Compile Include="ModelConnection\DBConn.cs" />
+    <Compile Include="Model\GridBoard.cs" />
     <Compile Include="Model\TelaPrincipal.cs" />
     <Compile Include="Model\Historico.cs" />
     <Compile Include="Model\Jogo.cs" />
