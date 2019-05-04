@@ -22,7 +22,7 @@ namespace APS3_CacaPalavras.View
 
         private void FrmJogo_Load(object sender, EventArgs e)
         {
-            dataGridJogo = GridBoard.PopularGrid(dataGridJogo);
+            dataGridJogo = DataGridJogo.PopularGrid(dataGridJogo);
         }
         private void IniciarJogo()
         {
@@ -37,34 +37,34 @@ namespace APS3_CacaPalavras.View
         //eventos
         private void dataGridJogo_SelectionChanged(object sender, EventArgs e)
         {
-            GridBoard.IdentificarMov(dataGridJogo);
-            GridBoard.SelecionarCelulasMovOrientacao(dataGridJogo);
-            GridBoard.DeselecionarCelulasNaoMovOrientacao(dataGridJogo);
+            DataGridJogo.IdentificarMov(dataGridJogo);
+            DataGridJogo.SelecionarCelulasMovOrientacao(dataGridJogo);
+            DataGridJogo.DeselecionarCelulasNaoMovOrientacao(dataGridJogo);
         }
 
         private void dataGridJogo_CellMouseMove(object sender, DataGridViewCellMouseEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                if (GridBoard.firstCell != null)
+                if (DataGridJogo.firstCell != null)
                 {
-                    GridBoard.distCell = new int[2] { e.RowIndex, e.ColumnIndex };
+                    DataGridJogo.distCell = new int[2] { e.RowIndex, e.ColumnIndex };
                 }
             }
         }
 
         private void dataGridJogo_MouseUp(object sender, MouseEventArgs e)
         {
-            GridBoard.firstCell = null;
-            GridBoard.distCell = null;
-            GridBoard.distMovCell = null;
-            GridBoard.movSentido = null;
+            DataGridJogo.firstCell = null;
+            DataGridJogo.distCell = null;
+            DataGridJogo.distMovCell = null;
+            DataGridJogo.movSentido = null;
         }
         private void dataGridJogo_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (GridBoard.firstCell == null)
+            if (DataGridJogo.firstCell == null)
             {
-                GridBoard.firstCell = new int[2] { e.RowIndex, e.ColumnIndex };
+                DataGridJogo.firstCell = new int[2] { e.RowIndex, e.ColumnIndex };
             }
         }
     }

@@ -1,6 +1,6 @@
 ﻿namespace APS3_CacaPalavras.View
 {
-    partial class FormTelaPrincipal
+    partial class FormPrincipal
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormTelaPrincipal));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormPrincipal));
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnSair = new System.Windows.Forms.Button();
             this.btnNovoJogo = new System.Windows.Forms.Button();

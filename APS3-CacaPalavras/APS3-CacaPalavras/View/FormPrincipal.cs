@@ -12,9 +12,9 @@ using System.Windows.Forms;
 
 namespace APS3_CacaPalavras.View
 {
-    public partial class FormTelaPrincipal : Form
+    public partial class FormPrincipal : Form
     {
-        public FormTelaPrincipal()
+        public FormPrincipal()
         {
             InitializeComponent();
         }
@@ -120,7 +120,7 @@ namespace APS3_CacaPalavras.View
             if(dificuldade != 0)
             {
                 //adicionando dificuldade
-                jogo.NivelDificuldade = FormTelaPrincipal.dificuldade;
+                jogo.NivelDificuldade = FormPrincipal.dificuldade;
 
                 //adicionando obj jogo à classe estática de controle
                 JogoExecucao.jogo = jogo;

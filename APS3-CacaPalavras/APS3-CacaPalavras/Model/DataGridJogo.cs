@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace APS3_CacaPalavras.Model
 {
-    class GridBoard
+    class DataGridJogo
     {
         /// <summary>
         /// CONFIG MOV

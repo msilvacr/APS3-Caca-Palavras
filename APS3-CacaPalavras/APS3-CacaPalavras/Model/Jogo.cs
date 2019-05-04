@@ -9,8 +9,8 @@ namespace APS3_CacaPalavras.Model
     public class Jogo
     {
         //DEFININDO CONSTANTES DE QTD DE PALAVRAS E TAMANHO DE MATRIZ POR NIVEL DE DIFICULDADE { 0 = FACIL, 1 = MÉDIO, 2 = DIFICIL, 3 = INSANO }
-        private static readonly int[] qtdPalavrasPorDificuldade = new int[4] { 8, 10, 12, 14 };
-        private static readonly int[] tamanhoMatrizPorDificuldade = new int[4] { 14, 16, 18, 22 };
+        private static readonly int[] QTD_PALAVRAS_POR_NIVEL = new int[4] { 8, 10, 12, 14 };
+        private static readonly int[] TAMANHO_MATRIZ_POR_NIVEL = new int[4] { 14, 16, 18, 22 };
 
         //atributos
         private int idJogo;
@@ -33,10 +33,10 @@ namespace APS3_CacaPalavras.Model
         public TimeSpan DuracaoJogo { get { return duracaoJogo; } set { duracaoJogo = value; } }
 
         public static int QtdPalavrasPorDificuldade(int i){
-            return qtdPalavrasPorDificuldade[i];
+            return QTD_PALAVRAS_POR_NIVEL[i];
         }
         public static int TamanhoMatrizPorDificuldade(int i){
-            return tamanhoMatrizPorDificuldade[i];
+            return TAMANHO_MATRIZ_POR_NIVEL[i];
         }
     }
 

@@ -32,7 +32,7 @@ namespace APS3_CacaPalavras
             {   //verificando se foi criado obj usuário sessão
                 if(UsuarioLogado.Logado == true && UsuarioLogado.User != null)
                 {   //iniciando aplicação 
-                    Application.Run(new FormTelaPrincipal());
+                    Application.Run(new FormPrincipal());
                 }                
             }
         }
