@@ -127,7 +127,7 @@ namespace APS3_CacaPalavras.View
 
 
                 //criando novo jogo
-                Model.NovoJogo.novoJogo();
+                Model.NovoJogo.gerarJogo();
 
                 //chamando formJogo
                 FormJogo formJogo = new FormJogo();
@@ -135,6 +135,8 @@ namespace APS3_CacaPalavras.View
                 this.Visible = false;
 
                 formJogo.ShowDialog();
+
+                this.Visible = true;
             }
         }
 

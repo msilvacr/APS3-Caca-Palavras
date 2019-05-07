@@ -55,7 +55,7 @@
             this.dataGridJogo.RowHeadersVisible = false;
             this.dataGridJogo.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.dataGridJogo.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dataGridJogo.Size = new System.Drawing.Size(500, 500);
+            this.dataGridJogo.Size = new System.Drawing.Size(700, 700);
             this.dataGridJogo.TabIndex = 0;
             this.dataGridJogo.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridJogo_CellMouseDown);
             this.dataGridJogo.CellMouseMove += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridJogo_CellMouseMove);
@@ -66,7 +66,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(523, 513);
+            this.ClientSize = new System.Drawing.Size(722, 722);
             this.Controls.Add(this.dataGridJogo);
             this.Name = "FormJogo";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

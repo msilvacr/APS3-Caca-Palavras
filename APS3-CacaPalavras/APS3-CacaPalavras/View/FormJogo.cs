@@ -22,7 +22,7 @@ namespace APS3_CacaPalavras.View
 
         private void FrmJogo_Load(object sender, EventArgs e)
         {
-            dataGridJogo = DataGridJogo.PopularGrid(dataGridJogo);
+            dataGridJogo = DataGridJogo.PopularGrid(dataGridJogo, JogoExecucao.jogo.MatrizJogo);
         }
         private void IniciarJogo()
         {

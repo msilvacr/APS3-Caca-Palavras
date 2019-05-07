@@ -19,10 +19,26 @@ namespace APS3_CacaPalavras.View
         }
 
         //eventos
+        //btnInsano
+        private void btnInsano_Click(object sender, EventArgs e)
+        {
+            Selecao(3);
+        }
+        private void btnInsano_MouseEnter(object sender, EventArgs e)
+        {
+            this.btnInsano.BackColor = Color.FromArgb(255, 255, 255);
+            this.btnInsano.ForeColor = Color.FromArgb(190, 0, 1);
+        }
+        private void btnInsano_MouseLeave(object sender, EventArgs e)
+        {
+            this.btnInsano.ForeColor = Color.FromArgb(255, 255, 255);
+            this.btnInsano.BackColor = Color.FromArgb(190, 0, 1);
+        }
+
         //btnDificil
         private void btnDificil_Click(object sender, EventArgs e)
         {
-            Selecao(3);
+            Selecao(2);
         }
         private void btnDificil_MouseEnter(object sender, EventArgs e)
         {
@@ -40,7 +56,7 @@ namespace APS3_CacaPalavras.View
         //btnNormal
         private void btnNormal_Click(object sender, EventArgs e)
         {
-            Selecao(2);
+            Selecao(1);
         }
         private void btnNormal_MouseEnter(object sender, EventArgs e)
         {
@@ -57,7 +73,7 @@ namespace APS3_CacaPalavras.View
         //btnFacil
         private void btnFacil_Click(object sender, EventArgs e)
         {
-            Selecao(1);
+            Selecao(0);
         }
         private void btnFacil_MouseEnter(object sender, EventArgs e)
         {
@@ -78,5 +94,7 @@ namespace APS3_CacaPalavras.View
             FormPrincipal.dificuldade = dfc;
             this.Dispose();
         }
+
+
     }
 }

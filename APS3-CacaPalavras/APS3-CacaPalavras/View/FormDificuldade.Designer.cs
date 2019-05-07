@@ -34,6 +34,7 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnFacil = new System.Windows.Forms.Button();
             this.btnNormal = new System.Windows.Forms.Button();
+            this.btnInsano = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -53,7 +54,7 @@
             this.btnDificil.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnDificil.Font = new System.Drawing.Font("Segoe Print", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDificil.ForeColor = System.Drawing.Color.White;
-            this.btnDificil.Location = new System.Drawing.Point(12, 97);
+            this.btnDificil.Location = new System.Drawing.Point(12, 156);
             this.btnDificil.Name = "btnDificil";
             this.btnDificil.Size = new System.Drawing.Size(247, 46);
             this.btnDificil.TabIndex = 22;
@@ -79,7 +80,7 @@
             this.btnFacil.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnFacil.Font = new System.Drawing.Font("Segoe Print", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnFacil.ForeColor = System.Drawing.Color.White;
-            this.btnFacil.Location = new System.Drawing.Point(12, 221);
+            this.btnFacil.Location = new System.Drawing.Point(12, 280);
             this.btnFacil.Name = "btnFacil";
             this.btnFacil.Size = new System.Drawing.Size(247, 46);
             this.btnFacil.TabIndex = 20;
@@ -95,7 +96,7 @@
             this.btnNormal.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnNormal.Font = new System.Drawing.Font("Segoe Print", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnNormal.ForeColor = System.Drawing.Color.White;
-            this.btnNormal.Location = new System.Drawing.Point(12, 159);
+            this.btnNormal.Location = new System.Drawing.Point(12, 218);
             this.btnNormal.Name = "btnNormal";
             this.btnNormal.Size = new System.Drawing.Size(247, 46);
             this.btnNormal.TabIndex = 19;
@@ -105,12 +106,29 @@
             this.btnNormal.MouseEnter += new System.EventHandler(this.btnNormal_MouseEnter);
             this.btnNormal.MouseLeave += new System.EventHandler(this.btnNormal_MouseLeave);
             // 
+            // btnInsano
+            // 
+            this.btnInsano.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnInsano.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnInsano.Font = new System.Drawing.Font("Segoe Print", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnInsano.ForeColor = System.Drawing.Color.White;
+            this.btnInsano.Location = new System.Drawing.Point(12, 95);
+            this.btnInsano.Name = "btnInsano";
+            this.btnInsano.Size = new System.Drawing.Size(247, 46);
+            this.btnInsano.TabIndex = 22;
+            this.btnInsano.Text = "INSANO";
+            this.btnInsano.UseVisualStyleBackColor = false;
+            this.btnInsano.Click += new System.EventHandler(this.btnInsano_Click);
+            this.btnInsano.MouseEnter += new System.EventHandler(this.btnInsano_MouseEnter);
+            this.btnInsano.MouseLeave += new System.EventHandler(this.btnInsano_MouseLeave);
+            // 
             // FormDificuldade
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(273, 279);
+            this.ClientSize = new System.Drawing.Size(273, 345);
             this.Controls.Add(this.label2);
+            this.Controls.Add(this.btnInsano);
             this.Controls.Add(this.btnDificil);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.btnFacil);
@@ -135,5 +153,6 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button btnFacil;
         private System.Windows.Forms.Button btnNormal;
+        private System.Windows.Forms.Button btnInsano;
     }
 }

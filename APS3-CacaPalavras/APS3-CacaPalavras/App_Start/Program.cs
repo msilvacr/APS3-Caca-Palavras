@@ -16,11 +16,6 @@ namespace APS3_CacaPalavras
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-
-            FormJogo jogo = new FormJogo();
-            jogo.ShowDialog();
-
-
             //criando tela de acesso
             FormAcesso frmAcesso = new FormAcesso();
 

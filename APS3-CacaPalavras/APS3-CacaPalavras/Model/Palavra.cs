@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,12 +11,12 @@ namespace APS3_CacaPalavras.Model
     public class Palavra
     {
         private static readonly int MAX_LENGTH = 22;
-
+        private static readonly int MIN_LENGTH = 3;
 
         //enum de direções
-        public enum Direction { None = 0, Baixo, Direita, BaixoEsquerda, BaixoDireita, Cima, Esquerda, CimaEsquerda, CimaDireita};
+        public enum Direction { None = 0, Baixo, Direita, Cima, Esquerda, BaixoDireita, CimaDireita, BaixoEsquerda, CimaEsquerda };
 
-
+       
         //atributos
         private int idPalavraJogo; //id único da palavra no jogo
         private int idJogo; //jogo que a palavra pertence

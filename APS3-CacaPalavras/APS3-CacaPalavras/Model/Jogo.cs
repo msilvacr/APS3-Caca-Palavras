@@ -10,12 +10,12 @@ namespace APS3_CacaPalavras.Model
     {
         //DEFININDO CONSTANTES DE QTD DE PALAVRAS E TAMANHO DE MATRIZ POR NIVEL DE DIFICULDADE { 0 = FACIL, 1 = MÉDIO, 2 = DIFICIL, 3 = INSANO }
         private static readonly int[] QTD_PALAVRAS_POR_NIVEL = new int[4] { 8, 10, 12, 14 };
-        private static readonly int[] TAMANHO_MATRIZ_POR_NIVEL = new int[4] { 14, 16, 18, 22 };
+        private static readonly int[] TAMANHO_MATRIZ_POR_NIVEL = new int[4] { 14, 16, 18, 25 };
 
         //atributos
         private int idJogo;
         private Usuario user;
-        private string[,] matrizJogo;
+        private char[,] matrizJogo;
         private int nivelDificuldade;
         private DateTime dtJogo;
         private Palavra[] palavras;
@@ -26,7 +26,7 @@ namespace APS3_CacaPalavras.Model
         public int IdJogo { get { return idJogo; } set { idJogo = value; } }
         public Usuario User { get { return user; } set { user = value; } }
         public int NivelDificuldade { get { return nivelDificuldade; } set { nivelDificuldade = value; } }
-        public string[,] MatrizJogo { get { return matrizJogo; } set { matrizJogo = value; } }
+        public char[,] MatrizJogo { get { return matrizJogo; } set { matrizJogo = value; } }
         public DateTime DtJogo { get { return dtJogo; } set { dtJogo = value; } }
         public Palavra[] Palavras { get { return palavras; } set { palavras = value; } }
         public Boolean StatusJogo { get { return statusJogo; } set { statusJogo = value; } }
@@ -49,10 +49,16 @@ namespace APS3_CacaPalavras.Model
     public class NovoJogo
     {
         //NOVO JOGO
-        public static void novoJogo()
+        public static void gerarJogo()
         {
             //passando valor referente as const qtdPalavrasPorDificuldade, tamanhoMatrizPorDificuldade
             carregarPalavrasJogo(Jogo.QtdPalavrasPorDificuldade(JogoExecucao.jogo.NivelDificuldade), Jogo.TamanhoMatrizPorDificuldade(JogoExecucao.jogo.NivelDificuldade)); ;
+
+            gerarMatrizJogo(JogoExecucao.jogo.NivelDificuldade);
+
+            //ENQUANTO AS TENTATIVAS FOREM FALHAS -> REPITA:
+            while(!MatrizJogo.Gerar(JogoExecucao.jogo.Palavras, JogoExecucao.jogo.MatrizJogo));
+
         }
 
         //Sorteia as palavras que estarão presentes no jogo
@@ -74,8 +80,27 @@ namespace APS3_CacaPalavras.Model
                 Palavra palavra = new Palavra(dataTable.Rows[i].Field<Int32>(0), dataTable.Rows[i].Field<string>(1));
                 palavras[i] = palavra;
             }
+
+
             //executando ordenador de palavras com crescente = false
             JogoExecucao.jogo.Palavras = ordenarPalavrasPorTamanho(palavras, false);
+        }
+
+        private static bool possuiPalavrasDuplicadas(Palavra[] palavras)
+        {
+            for(int i = 0; i < palavras.Length; i ++)
+            {
+                for(int j = 0; i < palavras.Length; j++)
+                {
+                    if(palavras[i].TextoPalavra == palavras[j].TextoPalavra)
+                    {
+                        string s = string.Format("TEMPOS UM PROBLEMA: POR ALGUM MOTIVO AS PALAVRAS ESTÃO DUPLICADAS: {0} == {1}", palavras[i].TextoPalavra, palavras[j].TextoPalavra);
+                        MessageBox.Show(s);
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
 
         //ordenador de obj do tipo palavra a partir do tamanho do TEXTO DA PALAVRA
@@ -114,24 +139,12 @@ namespace APS3_CacaPalavras.Model
                     }
                 }
             }
-
-            //VERIFICAR POSSÍVEIS ERROS
-            for (int x = 0; x < palavras.Length; x++)
-            {
-                MessageBox.Show(String.Format("{0}º = O tamanho da palavra é: {1}", x, palavras[x].TextoPalavra.Length));
-            }
-
             return palavras;
         }
 
-        private static void encaixarPalavrasMatriz(string[,] matriz, Palavra[] palavras)
+        private static void gerarMatrizJogo(int dificuldade)
         {
-            
-        }
-
-        private static void preencherCelulasMatriz()
-        {
-
+            JogoExecucao.jogo.MatrizJogo = new char[Jogo.TamanhoMatrizPorDificuldade(dificuldade), Jogo.TamanhoMatrizPorDificuldade(dificuldade)];
         }
     }
 

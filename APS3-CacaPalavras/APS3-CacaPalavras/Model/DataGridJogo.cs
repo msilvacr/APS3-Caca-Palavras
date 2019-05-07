@@ -19,16 +19,16 @@ namespace APS3_CacaPalavras.Model
         public static string movSentido = null; //armazena a orientação do movimento {V, H, D}
 
         //métodos
-        public static DataGridView PopularGrid(DataGridView dataGridJogo)
+        public static DataGridView PopularGrid(DataGridView dataGridJogo, char[,] matriz)
         {
-            int qtdXY = 13;
+            
             //inserindo colunas
-            for (int p = 0; p < qtdXY; p++)
+            for (int p = 0; p < matriz.GetLength(1); p++)
             {
                 dataGridJogo.Columns.Add(Convert.ToString(p), "");
             }
             //inserindo linhas
-            for (int p = 0; p < qtdXY; p++)
+            for (int p = 0; p < matriz.GetLength(0); p++)
             {
                 dataGridJogo.Rows.Add();
             }
@@ -37,7 +37,7 @@ namespace APS3_CacaPalavras.Model
             {
                 for (int c = 0; c < dataGridJogo.Columns.Count; c++)
                 {
-                    dataGridJogo[i, c].Value = string.Format("{0}, {1}", i, c);
+                    dataGridJogo[i, c].Value = matriz[i,c];
                 }
             }
             //definindo todas as celulas como readOnly
