@@ -11,8 +11,12 @@ namespace APS3_CacaPalavras.Model
 {
     class MatrizJogo
     {
+        private static readonly string abcd = "ABCDEFGHIJKLMNOPQRSTUVWXYZÇ";
+
         public static bool Gerar(Palavra[] palavras, char[,] matriz)
         {
+            Random rdn = new Random();
+
             int nPalavras = 0;
             int tentativas = 0;
 
@@ -40,6 +44,8 @@ namespace APS3_CacaPalavras.Model
 
                         if (nPalavras == palavras.Length)
                         {
+                            matriz = preencherEspacosMatriz(matriz, rdn);
+
                             JogoExecucao.jogo.MatrizJogo = matriz;
                             JogoExecucao.jogo.Palavras = palavras;
 
@@ -65,6 +71,27 @@ namespace APS3_CacaPalavras.Model
                 }
             }
             return false;
+        }
+
+        private static char[,] preencherEspacosMatriz(char[,] matriz, Random rdn)
+        {
+            for(int x = 0; x < matriz.GetLength(0); x++)
+            {
+                for (int y = 0; y < matriz.GetLength(0); y++)
+                {
+                    if(matriz[x,y] == '\0')
+                    {
+                        matriz[x, y] = gerarCharAleatorio(rdn);
+                    }
+                }
+            }
+            return matriz;
+        }
+        private static char gerarCharAleatorio(Random rdn)
+        {
+            int index = rdn.Next(abcd.Length);
+
+            return abcd[index];
         }
 
         private static CoordenadasPalavraEMatriz inserirCoordenadas(DirecaoECelulaInicialPalavra dl, Palavra palavra, char[,] matriz)
@@ -96,21 +123,6 @@ namespace APS3_CacaPalavras.Model
             return matriz;
         }
 
-        private static bool verificarCelulasAoRedor(char[,] matriz, int[,] celulaInicial)
-        {
-            if(matriz[celulaInicial[0,0] + 1, celulaInicial[0,1]] != '\0' || matriz[celulaInicial[0, 0] - 1, celulaInicial[0,1]] != '\0')
-            {
-                return false;
-            }
-            else if (matriz[celulaInicial[0, 0], celulaInicial[0, 1] + 1] != '\0' || matriz[celulaInicial[0, 0] - 1, celulaInicial[0, 1] - 1] != '\0')
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }
         private static bool verificarDirecao(DirecaoECelulaInicialPalavra dl, char[,] matriz, string palavra)
         {
 
@@ -125,11 +137,6 @@ namespace APS3_CacaPalavras.Model
             }
             //VERIFICANDO SE O X E Y DA ULTIMA CELULA QUE A PALAVRA IRÁ PREENCHER SÃO MAIORES QUE 0 
             else if (ultP[0, 0] < 0 || ultP[0, 1] < 0)
-            {
-                return false;
-            }
-            //VERIFICANDO SE AS CELULAS ACIMA, A ESQUERDA, A DIREITA E ABAIXO SÃO CELULAS VAZIAS
-            else if (verificarCelulasAoRedor(matriz, dl.CelulaInicial) == false)
             {
                 return false;
             }
@@ -170,19 +177,19 @@ namespace APS3_CacaPalavras.Model
             {
                 case 0:
                     //direcaoECelulaInicial.Direcao = (Direction)values.GetValue(random.Next(values.Length));
-                    direcaoECelulaInicial.Direcao = (Direction)Enum.ToObject(typeof(Direction), random.Next(1, 2));
+                    direcaoECelulaInicial.Direcao = (Direction)Enum.ToObject(typeof(Direction), random.Next(0, 2));
                     break;
                 case 1:
                     //direcaoECelulaInicial.Direcao = (Direction)values.GetValue(random.Next(values.Length));
-                    direcaoECelulaInicial.Direcao = (Direction)Enum.ToObject(typeof(Direction), random.Next(1, 4));
+                    direcaoECelulaInicial.Direcao = (Direction)Enum.ToObject(typeof(Direction), random.Next(0, 4));
                     break;
                 case 2:
                     //direcaoECelulaInicial.Direcao = (Direction)values.GetValue(random.Next(values.Length));
-                    direcaoECelulaInicial.Direcao = (Direction)Enum.ToObject(typeof(Direction), random.Next(1, 6));
+                    direcaoECelulaInicial.Direcao = (Direction)Enum.ToObject(typeof(Direction), random.Next(0, 6));
                     break;
                 case 3:
                     //direcaoECelulaInicial.Direcao = (Direction)values.GetValue(random.Next(values.Length));
-                    direcaoECelulaInicial.Direcao = (Direction)Enum.ToObject(typeof(Direction), random.Next(1, 8));
+                    direcaoECelulaInicial.Direcao = (Direction)Enum.ToObject(typeof(Direction), random.Next(0, 8));
                     break;
 
                 default:

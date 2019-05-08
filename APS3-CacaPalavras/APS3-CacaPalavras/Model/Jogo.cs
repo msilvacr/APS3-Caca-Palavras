@@ -10,10 +10,11 @@ namespace APS3_CacaPalavras.Model
     {
         //DEFININDO CONSTANTES DE QTD DE PALAVRAS E TAMANHO DE MATRIZ POR NIVEL DE DIFICULDADE { 0 = FACIL, 1 = MÉDIO, 2 = DIFICIL, 3 = INSANO }
         private static readonly int[] QTD_PALAVRAS_POR_NIVEL = new int[4] { 8, 10, 12, 14 };
-        private static readonly int[] TAMANHO_MATRIZ_POR_NIVEL = new int[4] { 14, 16, 18, 25 };
+        private static readonly int[] TAMANHO_MATRIZ_POR_NIVEL = new int[4] { 10, 14, 18, 24 };
 
         //atributos
         private int idJogo;
+        private int idMatriz;
         private Usuario user;
         private char[,] matrizJogo;
         private int nivelDificuldade;
@@ -24,6 +25,7 @@ namespace APS3_CacaPalavras.Model
 
         //gets sets
         public int IdJogo { get { return idJogo; } set { idJogo = value; } }
+        public int IdMatriz { get { return idMatriz; } set { idMatriz = value; } }
         public Usuario User { get { return user; } set { user = value; } }
         public int NivelDificuldade { get { return nivelDificuldade; } set { nivelDificuldade = value; } }
         public char[,] MatrizJogo { get { return matrizJogo; } set { matrizJogo = value; } }
@@ -48,9 +50,17 @@ namespace APS3_CacaPalavras.Model
     //INICIAR NOVO JOGO
     public class NovoJogo
     {
+
         //NOVO JOGO
         public static void gerarJogo()
         {
+            //Inserindo data do jogo
+            JogoExecucao.jogo.DtJogo = DateTime.Now;
+            //Inserindo status do jogo
+            JogoExecucao.jogo.StatusJogo = false;
+            //Inserindo duração inicial 
+            JogoExecucao.jogo.DuracaoJogo = new TimeSpan(0);
+
             //passando valor referente as const qtdPalavrasPorDificuldade, tamanhoMatrizPorDificuldade
             carregarPalavrasJogo(Jogo.QtdPalavrasPorDificuldade(JogoExecucao.jogo.NivelDificuldade), Jogo.TamanhoMatrizPorDificuldade(JogoExecucao.jogo.NivelDificuldade)); ;
 
@@ -58,6 +68,16 @@ namespace APS3_CacaPalavras.Model
 
             //ENQUANTO AS TENTATIVAS FOREM FALHAS -> REPITA:
             while(!MatrizJogo.Gerar(JogoExecucao.jogo.Palavras, JogoExecucao.jogo.MatrizJogo));
+
+            if (InserirJogoDB(JogoExecucao.jogo))
+            {
+                InserirMatrizDB(JogoExecucao.jogo);
+            }
+            else
+            {
+                MessageBox.Show("Falha ao criar jogo...");
+                JogoExecucao.jogo = null;
+            }
 
         }
 
@@ -146,7 +166,74 @@ namespace APS3_CacaPalavras.Model
         {
             JogoExecucao.jogo.MatrizJogo = new char[Jogo.TamanhoMatrizPorDificuldade(dificuldade), Jogo.TamanhoMatrizPorDificuldade(dificuldade)];
         }
+
+        //INSERIR JOGO BD
+        private static bool InserirJogoDB(Jogo jogo)
+        {
+            //criando novo obj de conexão com DB
+            DBConn dbconn = new DBConn();
+
+            dbconn.LimparParametros();
+
+            dbconn.AdicionarParametros("@IDUsuario", JogoExecucao.jogo.User.IdUsuario);
+            dbconn.AdicionarParametros("@NivelDificuldade", JogoExecucao.jogo.NivelDificuldade);
+            dbconn.AdicionarParametros("@DTJogo", JogoExecucao.jogo.DtJogo);
+            dbconn.AdicionarParametros("@StatusJogo", Convert.ToInt16(JogoExecucao.jogo.StatusJogo));
+
+            TimeSpan dJogo = JogoExecucao.jogo.DuracaoJogo;
+            string duracao = string.Format("{0}:{1}:{2}", dJogo.Hours, dJogo.Minutes, dJogo.Seconds);
+
+            dbconn.AdicionarParametros("@Duracao", duracao);
+
+            string idJogo = dbconn.ExecutarManipulacao(CommandType.StoredProcedure, "uspJogoInserir").ToString();
+
+            if (idJogo == "O usuário possui um jogo não finalizado")
+            {
+                MessageBox.Show("Deu erro aqui, ainda tem jogo aberto pra esse usuároi");
+                return false;
+            }
+            else
+            {
+                JogoExecucao.jogo.IdJogo = Convert.ToInt32(idJogo);
+                return true;
+            }
+        }
+
+        //INSERIR MATRIZ DO JOGO DB
+        private static bool InserirMatrizDB(Jogo jogo)
+        {
+            //criando novo obj de conexão com DB
+            DBConn dbconn = new DBConn();
+
+            dbconn.LimparParametros();
+
+            dbconn.AdicionarParametros("@IDJogo", JogoExecucao.jogo.IdJogo);
+            dbconn.AdicionarParametros("@TamanhoX", JogoExecucao.jogo.MatrizJogo.GetLength(0));
+            dbconn.AdicionarParametros("@TamanhoY", JogoExecucao.jogo.MatrizJogo.GetLength(1));
+
+            string idMatriz = dbconn.ExecutarManipulacao(CommandType.StoredProcedure, "uspMatrizJogoInserir").ToString();
+
+            if (idMatriz  == "O jogo em questão já possui matriz")
+            {
+                MessageBox.Show("O jogo já possui mamtriz no DB");
+                return false;
+            }
+            else
+            {
+                JogoExecucao.jogo.IdMatriz = Convert.ToInt32(idMatriz);
+                return true;
+            }
+        }
+
+        //INSERIR VALOR CELULA MATRIZ DB
+
+        //
+        
+        //INSERIR PALAVRA JOGO DB
+
+
     }
+}
 
     //CONTINUAR UM JOGO JÁ INICIADO
     public class ContinuarJogo
@@ -159,4 +246,4 @@ namespace APS3_CacaPalavras.Model
     {
 
     }
-}
+

@@ -39,6 +39,8 @@
             this.dataGridJogo.AllowUserToDeleteRows = false;
             this.dataGridJogo.AllowUserToResizeColumns = false;
             this.dataGridJogo.AllowUserToResizeRows = false;
+            this.dataGridJogo.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.dataGridJogo.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridJogo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridJogo.ColumnHeadersVisible = false;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
@@ -50,12 +52,12 @@
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridJogo.DefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGridJogo.Location = new System.Drawing.Point(12, 12);
+            this.dataGridJogo.Location = new System.Drawing.Point(13, 33);
             this.dataGridJogo.Name = "dataGridJogo";
             this.dataGridJogo.RowHeadersVisible = false;
             this.dataGridJogo.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.dataGridJogo.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dataGridJogo.Size = new System.Drawing.Size(700, 700);
+            this.dataGridJogo.Size = new System.Drawing.Size(635, 635);
             this.dataGridJogo.TabIndex = 0;
             this.dataGridJogo.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridJogo_CellMouseDown);
             this.dataGridJogo.CellMouseMove += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridJogo_CellMouseMove);
@@ -66,8 +68,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(722, 722);
+            this.ClientSize = new System.Drawing.Size(707, 684);
             this.Controls.Add(this.dataGridJogo);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "FormJogo";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FrmJogo";

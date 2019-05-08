@@ -22,50 +22,70 @@ namespace APS3_CacaPalavras.View
 
         private void FrmJogo_Load(object sender, EventArgs e)
         {
-            dataGridJogo = DataGridJogo.PopularGrid(dataGridJogo, JogoExecucao.jogo.MatrizJogo);
+            //alterando fonte do grid a partir do nível de dificuldade
+            alterarFonteGridPorDificuldade();
+            //populando datagrid
+            dataGridJogo = GameBoard.PopularGrid(dataGridJogo, JogoExecucao.jogo.MatrizJogo);
         }
-        private void IniciarJogo()
-        {
 
-        }
-        private void CriarJogo()
-        {
-
-        }
 
 
         //eventos
         private void dataGridJogo_SelectionChanged(object sender, EventArgs e)
         {
-            DataGridJogo.IdentificarMov(dataGridJogo);
-            DataGridJogo.SelecionarCelulasMovOrientacao(dataGridJogo);
-            DataGridJogo.DeselecionarCelulasNaoMovOrientacao(dataGridJogo);
+            GameBoard.IdentificarMov(dataGridJogo);
+            GameBoard.SelecionarCelulasMovOrientacao(dataGridJogo);
+            GameBoard.DeselecionarCelulasNaoMovOrientacao(dataGridJogo);
         }
 
         private void dataGridJogo_CellMouseMove(object sender, DataGridViewCellMouseEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                if (DataGridJogo.firstCell != null)
+                if (GameBoard.firstCell != null)
                 {
-                    DataGridJogo.distCell = new int[2] { e.RowIndex, e.ColumnIndex };
+                    GameBoard.distCell = new int[2] { e.RowIndex, e.ColumnIndex };
                 }
             }
         }
 
         private void dataGridJogo_MouseUp(object sender, MouseEventArgs e)
         {
-            DataGridJogo.firstCell = null;
-            DataGridJogo.distCell = null;
-            DataGridJogo.distMovCell = null;
-            DataGridJogo.movSentido = null;
+            GameBoard.firstCell = null;
+            GameBoard.distCell = null;
+            GameBoard.distMovCell = null;
+            GameBoard.movSentido = null;
         }
         private void dataGridJogo_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (DataGridJogo.firstCell == null)
+            if (GameBoard.firstCell == null)
             {
-                DataGridJogo.firstCell = new int[2] { e.RowIndex, e.ColumnIndex };
+                GameBoard.firstCell = new int[2] { e.RowIndex, e.ColumnIndex };
             }
+        }
+
+
+        //métodos
+        private void alterarFonteGridPorDificuldade()
+        {
+            switch (JogoExecucao.jogo.NivelDificuldade)
+            {
+                case 0:
+                    this.dataGridJogo.Font = new Font("Serif", 12);
+                    break;
+                case 1:
+                    this.dataGridJogo.Font = new Font("Serif", 11);
+                    break;
+                case 2:
+                    this.dataGridJogo.Font = new Font("Serif", 10);
+                    break;
+                case 3:
+                    this.dataGridJogo.Font = new Font("Serif", 8);
+                    break;
+                default:
+                    break;
+            }
+
         }
     }
 }

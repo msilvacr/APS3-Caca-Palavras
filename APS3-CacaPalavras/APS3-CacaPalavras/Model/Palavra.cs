@@ -14,7 +14,7 @@ namespace APS3_CacaPalavras.Model
         private static readonly int MIN_LENGTH = 3;
 
         //enum de direções
-        public enum Direction { None = 0, Baixo, Direita, Cima, Esquerda, BaixoDireita, CimaDireita, BaixoEsquerda, CimaEsquerda };
+        public enum Direction { Baixo, Direita, Cima, Esquerda, BaixoDireita, CimaDireita, BaixoEsquerda, CimaEsquerda };
 
        
         //atributos

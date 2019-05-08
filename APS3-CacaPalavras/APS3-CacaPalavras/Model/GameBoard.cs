@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace APS3_CacaPalavras.Model
 {
-    class DataGridJogo
+    class GameBoard
     {
         /// <summary>
         /// CONFIG MOV
@@ -188,5 +188,7 @@ namespace APS3_CacaPalavras.Model
             }
             return dataGridJogo;
         }
+
+
     }
 }

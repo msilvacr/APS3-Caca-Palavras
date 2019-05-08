@@ -68,7 +68,7 @@
   <ItemGroup>
     <Compile Include="DataAccessObject\UsuarioDAO.cs" />
     <Compile Include="ModelConnection\DBConn.cs" />
-    <Compile Include="Model\DataGridJogo.cs" />
+    <Compile Include="Model\GameBoard.cs" />
     <Compile Include="Model\MatrizJogo.cs" />
     <Compile Include="Model\TelaPrincipal.cs" />
     <Compile Include="Model\Historico.cs" />

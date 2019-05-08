@@ -25,7 +25,7 @@ namespace APS3_CacaPalavras.View
         }
 
         //atributos
-        public static int dificuldade = 0;
+        public static int dificuldade;
 
         //eventos 
 
@@ -117,7 +117,7 @@ namespace APS3_CacaPalavras.View
             FormDificuldade formDificuldade = new FormDificuldade();
             formDificuldade.ShowDialog();
 
-            if(dificuldade != 0)
+            if(dificuldade > -1)
             {
                 //adicionando dificuldade
                 jogo.NivelDificuldade = FormPrincipal.dificuldade;
