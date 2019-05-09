@@ -1,4 +1,5 @@
 ﻿using APS3_CacaPalavras.Model;
+using APS3_CacaPalavras.ModelConnection;
 using APS3_CacaPalavras.ModelControl;
 using System;
 using System.Collections.Generic;
@@ -48,7 +49,21 @@ namespace APS3_CacaPalavras.View
         //btnNovoJogo
         private void btnNovoJogo_Click(object sender, EventArgs e)
         {
-            this.NovoJogo();
+            if(TelaPrincipal.ValidarJogoNaoFinalizado(UsuarioLogado.User.IdUsuario))
+            {
+                DialogResult dialog = MessageBox.Show("Caso queira criar um novo jogo, o jogo anterior não finalizado será perdido\nTem certeza que deseja continuar?", "Aviso", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button3);
+                if (dialog == DialogResult.Yes)
+                {
+                    if (this.ExcluirJogoNaoFinalizado(UsuarioLogado.User.IdUsuario))
+                    {
+                        this.NovoJogo();
+                    }
+                }
+            }
+            else
+            {
+                this.NovoJogo();
+            }
         }
         private void btnNovoJogo_MouseEnter(object sender, EventArgs e)
         {
@@ -147,6 +162,24 @@ namespace APS3_CacaPalavras.View
             if (dialogResult == DialogResult.Yes)
             {
                 this.Dispose();
+            }
+        }
+
+        private bool ExcluirJogoNaoFinalizado(int idUsuario)
+        {
+            DBConn dBConn = new DBConn();
+            dBConn.LimparParametros();
+
+            dBConn.AdicionarParametros("@IDUsuario", idUsuario);
+
+            string result = dBConn.ExecutarManipulacao(CommandType.StoredProcedure, "uspJogoExluirJogoNaoFinalizado").ToString();
+
+            if (result == "Excluido com sucesso")
+                return true;
+            else
+            {
+                MessageBox.Show(result);
+                return false;
             }
         }
     }

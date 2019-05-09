@@ -71,7 +71,16 @@ namespace APS3_CacaPalavras.Model
 
             if (InserirJogoDB(JogoExecucao.jogo))
             {
-                InserirMatrizDB(JogoExecucao.jogo);
+                if(InserirMatrizDB(JogoExecucao.jogo))
+                {
+                    if (InserirPalavraJogo(JogoExecucao.jogo))
+                    {
+                        if (InserirCelulaMatriz(JogoExecucao.jogo))
+                        {
+
+                        }
+                    }
+                }
             }
             else
             {
@@ -225,13 +234,64 @@ namespace APS3_CacaPalavras.Model
             }
         }
 
-        //INSERIR VALOR CELULA MATRIZ DB
+        private static bool InserirPalavraJogo(Jogo jogo)
+        {
+            DBConn dBConn = new DBConn();
+            for (int i = 0; i < jogo.Palavras.Length; i++)
+            {
+                dBConn.LimparParametros();
 
-        //
-        
-        //INSERIR PALAVRA JOGO DB
+                dBConn.AdicionarParametros("@IDJogo", jogo.IdJogo);
+                dBConn.AdicionarParametros("@IDPalavra", jogo.Palavras[i].IdPalavra);
+                dBConn.AdicionarParametros("@StatusPalavra", Convert.ToInt16(jogo.Palavras[i].StatusPalavra));
+                dBConn.AdicionarParametros("@Cor", jogo.Palavras[i].CorPalavra);
 
+                string result = dBConn.ExecutarManipulacao(CommandType.StoredProcedure, "uspPalavraJogoInserir").ToString();
+                if(result == "Este jogo já contém esta palavra")
+                {
+                    MessageBox.Show(result);
+                    MessageBox.Show("Deu ruim aqui");
+                }
+                else
+                {
+                    ///INSERIR IDPALAVRA JOGO
+                }
 
+            }
+            return true;
+        }
+
+        private static bool InserirCelulaMatriz(Jogo jogo)
+        {
+            DBConn dBConn = new DBConn();
+
+            for(int x = 0; x < jogo.MatrizJogo.GetLength(0); x ++)
+            {
+                for (int y = 0; y < jogo.MatrizJogo.GetLength(1); y++)
+                {
+                    dBConn.LimparParametros();
+
+                    dBConn.AdicionarParametros("@IDMatriz", jogo.IdMatriz);
+                    dBConn.AdicionarParametros("@PosicaoX", x);
+                    dBConn.AdicionarParametros("@PosicaoY", y);
+                    dBConn.AdicionarParametros("@Caracter", jogo.MatrizJogo[x,y]);
+
+                    string result = dBConn.ExecutarManipulacao(CommandType.StoredProcedure, "uspCelulaMatrizInserir").ToString();
+
+                    if (result == "Esta matriz já contem valor para a celula")
+                    {
+                        MessageBox.Show("Deu algum problema aqui na inserção da celula no DB");
+                        return false;
+                    }                  
+                }
+            }
+            return true;
+        }
+
+        private static bool inserirCelulaPalavra(Jogo jogo)
+        {
+            return true;
+        }
     }
 }
 
