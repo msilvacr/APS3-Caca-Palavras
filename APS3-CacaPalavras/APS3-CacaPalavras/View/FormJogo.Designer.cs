@@ -40,8 +40,7 @@
             this.dataGridJogo.AllowUserToResizeColumns = false;
             this.dataGridJogo.AllowUserToResizeRows = false;
             this.dataGridJogo.BackgroundColor = System.Drawing.SystemColors.Control;
-            this.dataGridJogo.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dataGridJogo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridJogo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dataGridJogo.ColumnHeadersVisible = false;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
@@ -52,8 +51,9 @@
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridJogo.DefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGridJogo.Location = new System.Drawing.Point(13, 33);
+            this.dataGridJogo.Location = new System.Drawing.Point(10, 10);
             this.dataGridJogo.Name = "dataGridJogo";
+            this.dataGridJogo.ReadOnly = true;
             this.dataGridJogo.RowHeadersVisible = false;
             this.dataGridJogo.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.dataGridJogo.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
@@ -68,7 +68,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(707, 684);
+            this.ClientSize = new System.Drawing.Size(657, 656);
             this.Controls.Add(this.dataGridJogo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;

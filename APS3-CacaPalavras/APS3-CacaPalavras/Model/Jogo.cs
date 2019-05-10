@@ -77,7 +77,13 @@ namespace APS3_CacaPalavras.Model
                     {
                         if (InserirCelulaMatriz(JogoExecucao.jogo))
                         {
-
+                            if(inserirCelulaPalavra(JogoExecucao.jogo))
+                            {
+                                if (inserirCelulaInicialPalavra(JogoExecucao.jogo))
+                                {
+                                    MessageBox.Show("O jogo foi criado e salvo com sucesso!", "aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                }
+                            }
                         }
                     }
                 }
@@ -246,17 +252,23 @@ namespace APS3_CacaPalavras.Model
                 dBConn.AdicionarParametros("@StatusPalavra", Convert.ToInt16(jogo.Palavras[i].StatusPalavra));
                 dBConn.AdicionarParametros("@Cor", jogo.Palavras[i].CorPalavra);
 
-                string result = dBConn.ExecutarManipulacao(CommandType.StoredProcedure, "uspPalavraJogoInserir").ToString();
-                if(result == "Este jogo já contém esta palavra")
+                try
                 {
-                    MessageBox.Show(result);
-                    MessageBox.Show("Deu ruim aqui");
+                    string result = dBConn.ExecutarManipulacao(CommandType.StoredProcedure, "uspPalavraJogoInserir").ToString();
+                    if (result == "Este jogo já contém esta palavra")
+                    {
+                        MessageBox.Show(result);
+                        MessageBox.Show("Deu ruim aqui");
+                    }
+                    else
+                    {
+                        jogo.Palavras[i].IdPalavraJogo = Convert.ToInt32(result);
+                    }
                 }
-                else
+                catch(Exception e)
                 {
-                    ///INSERIR IDPALAVRA JOGO
+                    MessageBox.Show(e.ToString());
                 }
-
             }
             return true;
         }
@@ -290,6 +302,48 @@ namespace APS3_CacaPalavras.Model
 
         private static bool inserirCelulaPalavra(Jogo jogo)
         {
+            DBConn dBConn = new DBConn();
+            for(int i = 0; i < jogo.Palavras.Length; i ++)
+            {
+                for (int j = 0; j < jogo.Palavras[i].PosicaoPalavra.GetLength(0); j++)
+                {
+                    dBConn.LimparParametros();
+
+                    dBConn.AdicionarParametros("@IDPalavraJogo", jogo.Palavras[i].IdPalavraJogo);
+                    dBConn.AdicionarParametros("@IDMatriz", jogo.IdMatriz);
+                    dBConn.AdicionarParametros("@PosicaoX", jogo.Palavras[i].PosicaoPalavra[j, 0]);
+                    dBConn.AdicionarParametros("@PosicaoY", jogo.Palavras[i].PosicaoPalavra[j, 1]);
+
+                    string result = dBConn.ExecutarManipulacao(CommandType.StoredProcedure, "uspCelulaPalavrInserir").ToString();
+                    
+                    if (result == "Não existe celula com as posições informadas")
+                    {
+                        MessageBox.Show("deu ruim alguma coisa aqui na inserção das posições da palavra");
+                    }
+                }
+            }
+            return true;
+        }
+
+        private static bool inserirCelulaInicialPalavra(Jogo jogo)
+        {
+            DBConn dBConn = new DBConn();
+            for(int i = 0; i < jogo.Palavras.Length; i++)
+            {
+                dBConn.LimparParametros();
+
+                dBConn.AdicionarParametros("@IDPalavraJogo", jogo.Palavras[i].IdPalavraJogo);
+                dBConn.AdicionarParametros("@IDMatriz", jogo.IdMatriz);
+                dBConn.AdicionarParametros("@PosicaoX", jogo.Palavras[i].CelulaInicial[0, 0]);
+                dBConn.AdicionarParametros("@PosicaoY", jogo.Palavras[i].PosicaoPalavra[0, 1]);
+
+                string result = dBConn.ExecutarManipulacao(CommandType.StoredProcedure, "uspCelulaPalavrInserirCelulaInicial").ToString();
+
+                if (result == "Não existe celula com as posições informadas")
+                {
+                    MessageBox.Show("deu ruim alguma coisa aqui na inserção das posições da palavra");
+                }
+            }
             return true;
         }
     }

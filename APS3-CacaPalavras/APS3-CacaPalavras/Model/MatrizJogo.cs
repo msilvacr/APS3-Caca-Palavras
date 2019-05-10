@@ -35,7 +35,7 @@ namespace APS3_CacaPalavras.Model
                     if (verificarDirecao(dl, matriz, palavras[i].TextoPalavra))
                     {
                         nPalavras++;
-
+                        palavras[i].CelulaInicial = dl.CelulaInicial;
                         CoordenadasPalavraEMatriz coordenadas = inserirCoordenadas(dl, palavras[i], matriz);
 
                         matriz = coordenadas.Matriz;
@@ -48,8 +48,6 @@ namespace APS3_CacaPalavras.Model
 
                             JogoExecucao.jogo.MatrizJogo = matriz;
                             JogoExecucao.jogo.Palavras = palavras;
-
-                            MessageBox.Show("CHEGUEI ATÉ O FIM DA CRIAÇÃO DA MATRIZ");
 
                             return true;
                         }
@@ -87,6 +85,7 @@ namespace APS3_CacaPalavras.Model
             }
             return matriz;
         }
+
         private static char gerarCharAleatorio(Random rdn)
         {
             int index = rdn.Next(abcd.Length);

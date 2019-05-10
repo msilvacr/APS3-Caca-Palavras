@@ -182,5 +182,10 @@ namespace APS3_CacaPalavras.View
                 return false;
             }
         }
+
+        private void FormPrincipal_VisibleChanged(object sender, EventArgs e)
+        {
+            IniciarForm();
+        }
     }
 } 

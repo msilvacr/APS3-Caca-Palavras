@@ -22,6 +22,7 @@ namespace APS3_CacaPalavras.Model
         private int idJogo; //jogo que a palavra pertence
         private int idPalavra; //palavra a que se refere
         private string textoPalavra;
+        private int[,] celulaInicial = new int[1, 2];
         Direction direcaoPalavra;
         private int[,] posicaoPalavra; //posição da palavra na matriz 
         private string corPalavra;
@@ -54,6 +55,7 @@ namespace APS3_CacaPalavras.Model
         public int IdPalavra { get { return idPalavra; } set { idPalavra = value; } }
         public int IdJogo { get { return idJogo; } set { idJogo = value; } }
         public string TextoPalavra { get { return textoPalavra; } set { textoPalavra = value; } }
+        public int[,] CelulaInicial { get { return celulaInicial; } set { celulaInicial = value; } }
         public Direction DirecaoPalavra { get { return direcaoPalavra; } set { direcaoPalavra = value; } }
         public int[,] PosicaoPalavra { get { return posicaoPalavra; } set { posicaoPalavra = value; } }
         public string CorPalavra{ get { return corPalavra; } set { corPalavra = value; } }
