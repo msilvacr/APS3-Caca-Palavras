@@ -61,6 +61,7 @@
             this.dataGridJogo.TabIndex = 0;
             this.dataGridJogo.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridJogo_CellMouseDown);
             this.dataGridJogo.CellMouseMove += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridJogo_CellMouseMove);
+            this.dataGridJogo.CellMouseUp += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridJogo_CellMouseUp);
             this.dataGridJogo.SelectionChanged += new System.EventHandler(this.dataGridJogo_SelectionChanged);
             this.dataGridJogo.MouseUp += new System.Windows.Forms.MouseEventHandler(this.dataGridJogo_MouseUp);
             // 

@@ -26,6 +26,7 @@ namespace APS3_CacaPalavras.View
             alterarFonteGridPorDificuldade();
             //populando datagrid
             dataGridJogo = GameBoard.PopularGrid(dataGridJogo, JogoExecucao.jogo.MatrizJogo);
+            dataGridJogo = GameBoard.AtualizarCoresGrid(dataGridJogo, JogoExecucao.jogo.Palavras);
         }
 
 
@@ -86,6 +87,16 @@ namespace APS3_CacaPalavras.View
                     break;
             }
 
+        }
+
+        private void dataGridJogo_CellMouseUp(object sender, DataGridViewCellMouseEventArgs e)
+        {
+
+            for(int i = 0; i < 3; i ++)
+            {
+                JogoExecucao.jogo.Palavras[i].StatusPalavra = true;
+            }
+            dataGridJogo = GameBoard.AtualizarCoresGrid(dataGridJogo, JogoExecucao.jogo.Palavras);
         }
     }
 }

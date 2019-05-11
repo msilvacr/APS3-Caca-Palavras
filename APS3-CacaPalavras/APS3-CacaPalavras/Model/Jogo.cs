@@ -347,17 +347,18 @@ namespace APS3_CacaPalavras.Model
             return true;
         }
     }
-}
+
 
     //CONTINUAR UM JOGO JÁ INICIADO
     public class ContinuarJogo
     {
+        private static void CarregarJogo()
+        {
 
+        }
     }
+}
 
-    //EXCLUIR JOGO 
-    public class ExcluirJogo
-    {
 
-    }
+
 

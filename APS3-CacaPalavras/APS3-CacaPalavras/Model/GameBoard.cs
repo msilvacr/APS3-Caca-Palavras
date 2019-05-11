@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -56,6 +57,76 @@ namespace APS3_CacaPalavras.Model
                 r.Height = dataGridJogo.Height / dataGridJogo.Rows.Count;
 
             return dataGridJogo;
+        }
+
+        public static DataGridView AtualizarCoresGrid(DataGridView datagridataGridJogo, Palavra[] palavras)
+        {
+            for (int i = 0; i < palavras.Length; i++)
+            {
+
+                if(palavras[i].StatusPalavra == true)
+                {
+                    string auxCorPalavra = palavras[i].CorPalavra;
+
+                    int r = 0;
+                    int g = 0;
+                    int b = 0;
+
+                    string auxR = "";
+                    string auxG = "";
+                    string auxB = "";
+
+                    foreach (char c in auxCorPalavra)
+                    {
+                        if(c != ',')
+                        {
+                            auxR += c;
+                            auxCorPalavra = auxCorPalavra.Substring(1);
+                        }
+                        else
+                        {
+                            auxCorPalavra = auxCorPalavra.Substring(1);
+                            r = Convert.ToInt32(auxR);
+                            break;
+                        }
+                    }
+                    foreach (char c in auxCorPalavra)
+                    {
+                        if (c != ',')
+                        {
+                            auxG += c;
+                            auxCorPalavra = auxCorPalavra.Substring(1);
+                        }
+                        else
+                        {
+                            auxCorPalavra = auxCorPalavra.Substring(1);
+                            g = Convert.ToInt32(auxG);
+                            break;
+                        }
+                    }
+                    foreach (char c in auxCorPalavra)
+                    {
+                        if (c != ',')
+                        {
+                            auxB += c;
+                            auxCorPalavra = auxCorPalavra.Substring(1);
+                        }
+                        else
+                        {
+                            b = Convert.ToInt32(auxB);
+                            break;
+                        }
+                    }
+
+                    Color cor = Color.FromArgb(r, g, b);
+
+                    for ( int j = 0; j < palavras[i].PosicaoPalavra.GetLength(0); j ++)
+                    {
+                        datagridataGridJogo[palavras[i].PosicaoPalavra[j, 0], palavras[i].PosicaoPalavra[j, 1]].Style.BackColor = cor;
+                    }
+                }
+            }
+            return datagridataGridJogo;
         }
 
         public static void IdentificarMov(DataGridView dataGridJogo)
