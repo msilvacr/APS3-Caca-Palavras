@@ -11,8 +11,8 @@ namespace APS3_CacaPalavras.Model
     public class Palavra
     {
         private static Random rdn = new Random();
-        private static readonly int MAX_LENGTH = 22;
-        private static readonly int MIN_LENGTH = 3;
+        //private static readonly int MAX_LENGTH = 22;
+        //private static readonly int MIN_LENGTH = 3;
 
         //enum de direções
         public enum Direction { Baixo, Direita, Cima, Esquerda, BaixoDireita, CimaDireita, BaixoEsquerda, CimaEsquerda };       
@@ -64,9 +64,26 @@ namespace APS3_CacaPalavras.Model
 
         private static string sortearCorRGB(Random rdn)
         {
-            int r = rdn.Next(40, 255);
-            int g = rdn.Next(40, 255);
-            int b = rdn.Next(40, 255);
+
+            int[] aux = new int[3] { rdn.Next(0, 230), rdn.Next(20, 240), rdn.Next(35, 255) };
+
+
+            List<int> listNumbers = new List<int>();
+
+            int number;
+            for (int i = 0; i < 3; i++)
+            {
+                do
+                {
+                    number = rdn.Next(0, 3);
+                } while (listNumbers.Contains(number));
+                listNumbers.Add(number);
+            }
+
+
+            int r = aux[listNumbers[0]];
+            int g = aux[listNumbers[1]];
+            int b = aux[listNumbers[2]];
 
             return String.Format("{0},{1},{2}", r, g, b);
         }

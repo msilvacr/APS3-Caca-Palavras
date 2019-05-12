@@ -26,7 +26,7 @@ namespace APS3_CacaPalavras.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DP619-07;Min Pool Size=5;Max Pool Size=350; Connect Timeout=3;Initial" +
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DP619-07;Min Pool Size=5;Max Pool Size=500; Connect Timeout=3;Initial" +
             " Catalog=APS3_DB;Integrated Security=True")]
         public string stringConexao {
             get {

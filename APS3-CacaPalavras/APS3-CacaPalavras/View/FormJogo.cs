@@ -27,6 +27,7 @@ namespace APS3_CacaPalavras.View
             //populando datagrid
             dataGridJogo = GameBoard.PopularGrid(dataGridJogo, JogoExecucao.jogo.MatrizJogo);
             dataGridJogo = GameBoard.AtualizarCoresGrid(dataGridJogo, JogoExecucao.jogo.Palavras);
+            dataGridJogo.ClearSelection();
         }
 
 
@@ -91,12 +92,40 @@ namespace APS3_CacaPalavras.View
 
         private void dataGridJogo_CellMouseUp(object sender, DataGridViewCellMouseEventArgs e)
         {
-
-            for(int i = 0; i < 3; i ++)
+            for(int i = 0; i < JogoExecucao.jogo.Palavras.Length; i++)
             {
-                JogoExecucao.jogo.Palavras[i].StatusPalavra = true;
+                if(JogoExecucao.jogo.Palavras[i].StatusPalavra == false)
+                {
+                    if(GameBoard.VerificarEAtualizarPalavra(gerarSelecaoPalavra()))
+                    {
+                        dataGridJogo = GameBoard.AtualizarCoresGrid(dataGridJogo, JogoExecucao.jogo.Palavras);
+                    }
+                }
             }
-            dataGridJogo = GameBoard.AtualizarCoresGrid(dataGridJogo, JogoExecucao.jogo.Palavras);
+            dataGridJogo.ClearSelection();
+        }
+
+        private int[,] gerarSelecaoPalavra()
+        {
+            int[,] selecao = new int[dataGridJogo.SelectedCells.Count, 2];
+
+            int i = 0;
+            foreach(DataGridViewCell cell in dataGridJogo.SelectedCells)
+            {
+                selecao[i, 0] = cell.RowIndex;
+                selecao[i, 1] = cell.ColumnIndex;
+                i++;
+            }
+            return selecao;
+        }
+
+        private void verificarConclusaoJogo()
+        {
+
+        }
+        private void ConcluirJogo()
+        {
+
         }
     }
 }

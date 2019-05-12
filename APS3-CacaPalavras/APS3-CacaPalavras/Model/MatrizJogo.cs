@@ -125,7 +125,6 @@ namespace APS3_CacaPalavras.Model
         private static bool verificarDirecao(DirecaoECelulaInicialPalavra dl, char[,] matriz, string palavra)
         {
 
-
             //CALCULA QUAL SERÁ A ULTIMA CELULA A SER PREENCHIDA PELA PALAVRA DE ACORDO COM O TAMANHO E A POSIÇAO DELA 
             int[,] ultP = new int[1, 2] { { dl.CelulaInicial[0, 0] + (dl.X * palavra.Length), dl.CelulaInicial[0, 1] + (dl.Y * palavra.Length) } };
 

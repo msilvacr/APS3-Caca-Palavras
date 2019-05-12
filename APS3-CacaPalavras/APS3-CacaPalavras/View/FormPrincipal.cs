@@ -51,7 +51,7 @@ namespace APS3_CacaPalavras.View
         {
             if(TelaPrincipal.ValidarJogoNaoFinalizado(UsuarioLogado.User.IdUsuario))
             {
-                DialogResult dialog = MessageBox.Show("Caso queira criar um novo jogo, o jogo anterior não finalizado será perdido\nTem certeza que deseja continuar?", "Aviso", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button3);
+                DialogResult dialog = MessageBox.Show("Caso queira criar um novo jogo, o jogo anterior não finalizado será perdido\nTem certeza que deseja continuar?", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2);
                 if (dialog == DialogResult.Yes)
                 {
                     if (this.ExcluirJogoNaoFinalizado(UsuarioLogado.User.IdUsuario))

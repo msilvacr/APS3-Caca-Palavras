@@ -19,6 +19,81 @@ namespace APS3_CacaPalavras.Model
         public static int[] distMovCell = null; //armazena a celula mais distante no eixo x, y, ou em diagonal, em relação a firstCell
         public static string movSentido = null; //armazena a orientação do movimento {V, H, D}
 
+
+        //métodos do jogo
+        public static bool VerificarEAtualizarPalavra(int[,] selecao)
+        {
+            for (int i = 0; i < JogoExecucao.jogo.Palavras.Length; i++)
+            {
+                if (JogoExecucao.jogo.Palavras[i].StatusPalavra == false)
+                {
+                    if (JogoExecucao.jogo.Palavras[i].TextoPalavra.Length == selecao.GetLength(0))
+                    {
+                        int[,] posicaoPalavra = JogoExecucao.jogo.Palavras[i].PosicaoPalavra;
+
+                        //aplicando mesma ordenação para ambas as matrizes
+                        posicaoPalavra = ordenarMatriz(posicaoPalavra);
+                        selecao = ordenarMatriz(selecao);
+
+                        //verificando se as matrizes são iguais
+                        var equal = selecao.Rank == posicaoPalavra.Rank &&
+                        Enumerable.Range(0, selecao.Rank).All(dimension => selecao.GetLength(dimension) == posicaoPalavra.GetLength(dimension)) &&
+                        selecao.Cast<int>().SequenceEqual(posicaoPalavra.Cast<int>());
+
+                        if(Convert.ToBoolean(equal))
+                        {
+                            JogoExecucao.jogo.Palavras[i].StatusPalavra = true;
+                            return true;
+                        }
+                    }
+                }
+            }
+            return false;
+        }
+
+        public static int[,] ordenarMatriz(int[,] matriz)
+        {
+            //ordenando y
+            for (int i = 0; i < matriz.GetLength(0); i++)
+            {
+                for(int j = 0; j < matriz.GetLength(0); j++)
+                {
+                    if (matriz[i, 1] > matriz[j, 1])
+                    {
+                        int auxX = matriz[j, 0];
+                        int auxY = matriz[j, 1];
+
+                        matriz[j, 0] = matriz[i, 0];
+                        matriz[j, 1] = matriz[i, 1];
+
+                        matriz[i, 0] = auxX;
+                        matriz[i, 1] = auxY;
+                    }
+                }
+            }
+            
+            //ordenando x
+            for (int i = 0; i < matriz.GetLength(0); i++)
+            {
+                for(int j =0; j < matriz.GetLength(0); j++)
+                {
+                    if(matriz[i,0] > matriz[j,0])
+                    {
+                        int auxX = matriz[j, 0];
+                        int auxY = matriz[j, 1];
+
+                        matriz[j, 0] = matriz[i, 0];
+                        matriz[j, 1] = matriz[i, 1];
+
+                        matriz[i, 0] = auxX;
+                        matriz[i, 1] = auxY;
+                    }
+                }
+            }
+
+            return matriz;
+        }
+
         //métodos
         public static DataGridView PopularGrid(DataGridView dataGridJogo, char[,] matriz)
         {
@@ -38,7 +113,7 @@ namespace APS3_CacaPalavras.Model
             {
                 for (int c = 0; c < dataGridJogo.Columns.Count; c++)
                 {
-                    dataGridJogo[i, c].Value = matriz[i,c];
+                    dataGridJogo.Rows[i].Cells[c].Value = matriz[i,c];
                 }
             }
             //definindo todas as celulas como readOnly
@@ -122,7 +197,7 @@ namespace APS3_CacaPalavras.Model
 
                     for ( int j = 0; j < palavras[i].PosicaoPalavra.GetLength(0); j ++)
                     {
-                        datagridataGridJogo[palavras[i].PosicaoPalavra[j, 0], palavras[i].PosicaoPalavra[j, 1]].Style.BackColor = cor;
+                        datagridataGridJogo.Rows[palavras[i].PosicaoPalavra[j, 0]].Cells[palavras[i].PosicaoPalavra[j, 1]].Style.BackColor = cor;
                     }
                 }
             }
