@@ -99,6 +99,7 @@ namespace APS3_CacaPalavras.View
                     if(GameBoard.VerificarEAtualizarPalavra(gerarSelecaoPalavra()))
                     {
                         dataGridJogo = GameBoard.AtualizarCoresGrid(dataGridJogo, JogoExecucao.jogo.Palavras);
+                        verificarConclusaoJogo();
                     }
                 }
             }
@@ -121,11 +122,23 @@ namespace APS3_CacaPalavras.View
 
         private void verificarConclusaoJogo()
         {
+            bool conclusao = true;
 
+            for(int i = 0; i < JogoExecucao.jogo.Palavras.Length; i++)
+            {
+                if (JogoExecucao.jogo.Palavras[i].StatusPalavra == false)
+                {
+                    conclusao = false;
+                }
+            }
+            if(conclusao)
+            {
+                ConcluirJogo();
+            }
         }
         private void ConcluirJogo()
         {
-
+            MessageBox.Show("O jogo foi concluido");
         }
     }
 }

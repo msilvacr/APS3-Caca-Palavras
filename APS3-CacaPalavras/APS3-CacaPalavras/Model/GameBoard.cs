@@ -1,5 +1,7 @@
-﻿using System;
+﻿using APS3_CacaPalavras.ModelConnection;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -18,6 +20,8 @@ namespace APS3_CacaPalavras.Model
         public static int[] distCell = null; //armazena [x, y] da celula mais distante da firstCell
         public static int[] distMovCell = null; //armazena a celula mais distante no eixo x, y, ou em diagonal, em relação a firstCell
         public static string movSentido = null; //armazena a orientação do movimento {V, H, D}
+
+        public static object DBconn { get; private set; }
 
 
         //métodos do jogo
@@ -43,12 +47,26 @@ namespace APS3_CacaPalavras.Model
                         if(Convert.ToBoolean(equal))
                         {
                             JogoExecucao.jogo.Palavras[i].StatusPalavra = true;
+                            atualizarPalavraDB(JogoExecucao.jogo.Palavras[i]);
                             return true;
                         }
                     }
                 }
             }
             return false;
+        }
+        private static void atualizarPalavraDB(Palavra palavra)
+        {
+            DBConn dBconn = new DBConn();
+
+            dBconn.LimparParametros();
+
+            dBconn.AdicionarParametros("@IDPalavraJogo", palavra.IdPalavraJogo);
+            dBconn.AdicionarParametros("@StatusPalavra", Convert.ToInt16(true));
+
+            string result = dBconn.ExecutarManipulacao(CommandType.StoredProcedure, "uspPalavraJogoAtualizarStatus").ToString();
+
+
         }
 
         public static int[,] ordenarMatriz(int[,] matriz)
