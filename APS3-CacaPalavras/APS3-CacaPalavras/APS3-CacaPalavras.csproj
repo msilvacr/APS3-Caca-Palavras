@@ -98,17 +98,23 @@
     <Compile Include="View\FormDificuldade.Designer.cs">
       <DependentUpon>FormDificuldade.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\FormJogoControles.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FormJogoControles.Designer.cs">
+      <DependentUpon>FormJogoControles.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\FormPrincipal.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="View\FormPrincipal.Designer.cs">
       <DependentUpon>FormPrincipal.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\FormJogo.cs">
+    <Compile Include="View\FormJogoMatriz.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\FormJogo.Designer.cs">
-      <DependentUpon>FormJogo.cs</DependentUpon>
+    <Compile Include="View\FormJogoMatriz.Designer.cs">
+      <DependentUpon>FormJogoMatriz.cs</DependentUpon>
     </Compile>
     <Compile Include="App_Start\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -131,11 +137,14 @@
     <EmbeddedResource Include="View\FormDificuldade.resx">
       <DependentUpon>FormDificuldade.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="View\FormJogoControles.resx">
+      <DependentUpon>FormJogoControles.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\FormPrincipal.resx">
       <DependentUpon>FormPrincipal.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\FormJogo.resx">
-      <DependentUpon>FormJogo.cs</DependentUpon>
+    <EmbeddedResource Include="View\FormJogoMatriz.resx">
+      <DependentUpon>FormJogoMatriz.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

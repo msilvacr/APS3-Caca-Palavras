@@ -11,25 +11,30 @@ using System.Windows.Forms;
 
 namespace APS3_CacaPalavras.View
 {
-    public partial class FormJogo : Form
+    public partial class FormJogoMatriz : Form
     {
+        FormJogoControles formJogoControles;
 
-
-        public FormJogo()
+        public FormJogoMatriz()
         {
+            this.formJogoControles = formJogoControles = new FormJogoControles(this);
+
             InitializeComponent();
         }
 
         private void FrmJogo_Load(object sender, EventArgs e)
         {
+
+            iniciarFormControles();
+
             //alterando fonte do grid a partir do nível de dificuldade
             alterarFonteGridPorDificuldade();
+
             //populando datagrid
             dataGridJogo = GameBoard.PopularGrid(dataGridJogo, JogoExecucao.jogo.MatrizJogo);
             dataGridJogo = GameBoard.AtualizarCoresGrid(dataGridJogo, JogoExecucao.jogo.Palavras);
             dataGridJogo.ClearSelection();
         }
-
 
 
         //eventos
@@ -44,26 +49,46 @@ namespace APS3_CacaPalavras.View
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                if (GameBoard.firstCell != null)
+                if (GameBoard.primeiraCelula != null)
                 {
-                    GameBoard.distCell = new int[2] { e.RowIndex, e.ColumnIndex };
+                    GameBoard.celulaMaisDistante = new int[2] { e.RowIndex, e.ColumnIndex };
                 }
             }
         }
 
         private void dataGridJogo_MouseUp(object sender, MouseEventArgs e)
         {
-            GameBoard.firstCell = null;
-            GameBoard.distCell = null;
-            GameBoard.distMovCell = null;
-            GameBoard.movSentido = null;
+            GameBoard.primeiraCelula = null;
+            GameBoard.celulaMaisDistante = null;
+            GameBoard.celulaMaisDistanteMovimento = null;
+            GameBoard.sentidoDoMovimento = null;
+
+            verificarPalavraSelecionada();
+            dataGridJogo.ClearSelection();
+
+            GameBoard.atualizarDuracaoJogo();
+
         }
+
         private void dataGridJogo_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (GameBoard.firstCell == null)
+            if (GameBoard.primeiraCelula == null)
             {
-                GameBoard.firstCell = new int[2] { e.RowIndex, e.ColumnIndex };
+                GameBoard.primeiraCelula = new int[2] { e.RowIndex, e.ColumnIndex };
             }
+        }
+
+        private void FormJogoMatriz_LocationChanged(object sender, EventArgs e)
+        {
+            formJogoControles.SetDesktopLocation(this.Location.X + this.Width - 7, this.Location.Y + 1);
+            formJogoControles.Focus();
+        }
+
+        private void FormJogoMatriz_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            GameBoard.atualizarDuracaoJogo();
+            formJogoControles.Dispose();
+            this.Dispose();
         }
 
 
@@ -90,20 +115,23 @@ namespace APS3_CacaPalavras.View
 
         }
 
-        private void dataGridJogo_CellMouseUp(object sender, DataGridViewCellMouseEventArgs e)
+        private void verificarPalavraSelecionada()
         {
-            for(int i = 0; i < JogoExecucao.jogo.Palavras.Length; i++)
+            if (dataGridJogo.SelectedCells.Count > 0)
             {
-                if(JogoExecucao.jogo.Palavras[i].StatusPalavra == false)
+                for (int i = 0; i < JogoExecucao.jogo.Palavras.Length; i++)
                 {
-                    if(GameBoard.VerificarEAtualizarPalavra(gerarSelecaoPalavra()))
+                    if (JogoExecucao.jogo.Palavras[i].StatusPalavra == false)
                     {
-                        dataGridJogo = GameBoard.AtualizarCoresGrid(dataGridJogo, JogoExecucao.jogo.Palavras);
-                        verificarConclusaoJogo();
+                        if (GameBoard.VerificarEAtualizarPalavra(gerarSelecaoPalavra()))
+                        {
+                            dataGridJogo = GameBoard.AtualizarCoresGrid(dataGridJogo, JogoExecucao.jogo.Palavras);
+                            formJogoControles.atualizarCoresGrid();
+                            verificarConclusaoJogo();
+                        }
                     }
                 }
             }
-            dataGridJogo.ClearSelection();
         }
 
         private int[,] gerarSelecaoPalavra()
@@ -118,6 +146,16 @@ namespace APS3_CacaPalavras.View
                 i++;
             }
             return selecao;
+        }
+
+        private void iniciarFormControles()
+        {
+            this.SetDesktopLocation(this.Location.X - formJogoControles.Width / 2, this.Location.Y);
+
+            //criando e configurando form de controles do jogo
+            formJogoControles.SetDesktopLocation(this.Location.X + this.Width - 7, this.Location.Y + 1);
+            formJogoControles.StartPosition = FormStartPosition.Manual;
+            formJogoControles.Show();
         }
 
         private void verificarConclusaoJogo()
@@ -136,9 +174,23 @@ namespace APS3_CacaPalavras.View
                 ConcluirJogo();
             }
         }
+
         private void ConcluirJogo()
         {
-            MessageBox.Show("O jogo foi concluido");
+            formJogoControles.pausar();
+
+            JogoExecucao.jogo.StatusJogo = true;
+
+            GameBoard.concluirJogo();
+
+            TimeSpan duracaoJogoTotal = JogoExecucao.jogo.DuracaoJogo;
+            string strDuracao = string.Format("{0}:{1}:{2}", duracaoJogoTotal.Hours, duracaoJogoTotal.Minutes, duracaoJogoTotal.Seconds);
+
+            MessageBox.Show("O jogo foi concluído em: " + duracaoJogoTotal, "Parabens!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+
+            this.Dispose();
         }
+
     }
 }

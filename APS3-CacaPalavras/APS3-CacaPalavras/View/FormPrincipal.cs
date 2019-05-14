@@ -145,7 +145,7 @@ namespace APS3_CacaPalavras.View
                 Model.NovoJogo.gerarJogo();
 
                 //chamando formJogo
-                FormJogo formJogo = new FormJogo();
+                FormJogoMatriz formJogo = new FormJogoMatriz();
 
                 this.Visible = false;
 

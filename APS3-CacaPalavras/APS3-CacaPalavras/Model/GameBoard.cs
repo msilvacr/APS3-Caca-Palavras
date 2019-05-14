@@ -12,19 +12,17 @@ namespace APS3_CacaPalavras.Model
 {
     class GameBoard
     {
-        /// <summary>
-        /// CONFIG MOV
-        /// </summary>
-
-        public static int[] firstCell = null; //armazena a primeira posição na tabela que foi selecionada [x,y]
-        public static int[] distCell = null; //armazena [x, y] da celula mais distante da firstCell
-        public static int[] distMovCell = null; //armazena a celula mais distante no eixo x, y, ou em diagonal, em relação a firstCell
-        public static string movSentido = null; //armazena a orientação do movimento {V, H, D}
+        //auxiliares 
+        public static int[] primeiraCelula = null; //armazena a primeira posição na tabela que foi selecionada [x,y]
+        public static int[] celulaMaisDistante = null; //armazena [x, y] da celula mais distante da firstCell
+        public static int[] celulaMaisDistanteMovimento = null; //armazena a celula mais distante no eixo x, y, ou em diagonal, em relação a firstCell
+        public static string sentidoDoMovimento = null; //armazena a orientação do movimento {V, H, D}
 
         public static object DBconn { get; private set; }
 
-
         //métodos do jogo
+
+        //PALAVRA
         public static bool VerificarEAtualizarPalavra(int[,] selecao)
         {
             for (int i = 0; i < JogoExecucao.jogo.Palavras.Length; i++)
@@ -55,6 +53,7 @@ namespace APS3_CacaPalavras.Model
             }
             return false;
         }
+
         private static void atualizarPalavraDB(Palavra palavra)
         {
             DBConn dBconn = new DBConn();
@@ -112,7 +111,58 @@ namespace APS3_CacaPalavras.Model
             return matriz;
         }
 
-        //métodos
+
+        //JOGO
+        public static void atualizarDuracaoJogo()
+        {
+            DBConn dBConn = new DBConn();
+
+            dBConn.LimparParametros();
+
+            dBConn.AdicionarParametros("@IDJogo", JogoExecucao.jogo.IdJogo);
+
+            TimeSpan dJogo = JogoExecucao.jogo.DuracaoJogo;
+            string strDuracao = string.Format("{0}:{1}:{2}", dJogo.Hours, dJogo.Minutes, dJogo.Seconds);
+
+            dBConn.AdicionarParametros("@Duracao", strDuracao);
+
+            string result = dBConn.ExecutarManipulacao(CommandType.StoredProcedure, "uspJogoAtualizarDuracao").ToString();
+
+            if(result == "O Jogo não existe")
+            {
+                MessageBox.Show("Deu merda aqui");
+            }
+        }
+
+        public static void verificarConclusaoJogo()
+        {
+
+        }
+
+        public static void concluirJogo()
+        {
+            DBConn dBConn = new DBConn();
+
+            dBConn.LimparParametros();
+
+            dBConn.AdicionarParametros("@IDJogo", JogoExecucao.jogo.IdJogo);
+
+            dBConn.AdicionarParametros("@StatusJogo", Convert.ToInt16(JogoExecucao.jogo.StatusJogo));
+
+            string result = dBConn.ExecutarManipulacao(CommandType.StoredProcedure, "uspJogoAtualizarStatus").ToString();
+
+            if(result == "O Jogo não existe")
+            {
+                MessageBox.Show("Deu ruim aqui");
+            }
+
+
+        }
+
+
+        
+        
+        //MATRIZ
         public static DataGridView PopularGrid(DataGridView dataGridJogo, char[,] matriz)
         {
             
@@ -133,7 +183,7 @@ namespace APS3_CacaPalavras.Model
                 {
                     dataGridJogo.Rows[i].Cells[c].Value = matriz[i,c];
                 }
-            }
+            }   
             //definindo todas as celulas como readOnly
             for (int i = 0; i < dataGridJogo.Rows.Count; ++i)
             {
@@ -225,39 +275,39 @@ namespace APS3_CacaPalavras.Model
         public static void IdentificarMov(DataGridView dataGridJogo)
         {
             //verificando se já foi definida a celula inicial
-            if (firstCell != null)
+            if (primeiraCelula != null)
 
             {
                 //definindo a firstCell como celula aux para verificacão
-                distMovCell = new int[2] { firstCell[0], firstCell[1] };
+                celulaMaisDistanteMovimento = new int[2] { primeiraCelula[0], primeiraCelula[1] };
 
                 //loop nas celulas selecionadas para encontrar celula mais distante 
                 foreach (DataGridViewCell celulaVolta in dataGridJogo.SelectedCells)
                 {
-                    int distX = Math.Abs(celulaVolta.RowIndex - firstCell[0]);
-                    int distXAnt = Math.Abs(distMovCell[0] - firstCell[0]);
+                    int distX = Math.Abs(celulaVolta.RowIndex - primeiraCelula[0]);
+                    int distXAnt = Math.Abs(celulaMaisDistanteMovimento[0] - primeiraCelula[0]);
 
-                    int distY = Math.Abs(celulaVolta.ColumnIndex - firstCell[1]);
-                    int distYAnt = Math.Abs(distMovCell[1] - firstCell[1]);
+                    int distY = Math.Abs(celulaVolta.ColumnIndex - primeiraCelula[1]);
+                    int distYAnt = Math.Abs(celulaMaisDistanteMovimento[1] - primeiraCelula[1]);
 
                     //Verificando se a distância para x é maior e se a distância para y é maior ou igual a da celula selecionada atualmente, em relação à firstCell
-                    if (distX > distXAnt && distX > distYAnt && celulaVolta.ColumnIndex == firstCell[1])
+                    if (distX > distXAnt && distX > distYAnt && celulaVolta.ColumnIndex == primeiraCelula[1])
                     {
-                        distMovCell[0] = celulaVolta.RowIndex;
-                        distMovCell[1] = celulaVolta.ColumnIndex;
-                        movSentido = "V";
+                        celulaMaisDistanteMovimento[0] = celulaVolta.RowIndex;
+                        celulaMaisDistanteMovimento[1] = celulaVolta.ColumnIndex;
+                        sentidoDoMovimento = "V";
                     }
-                    else if (distY > distYAnt && distY > distXAnt && celulaVolta.RowIndex == firstCell[0])
+                    else if (distY > distYAnt && distY > distXAnt && celulaVolta.RowIndex == primeiraCelula[0])
                     {
-                        distMovCell[0] = celulaVolta.RowIndex;
-                        distMovCell[1] = celulaVolta.ColumnIndex;
-                        movSentido = "H";
+                        celulaMaisDistanteMovimento[0] = celulaVolta.RowIndex;
+                        celulaMaisDistanteMovimento[1] = celulaVolta.ColumnIndex;
+                        sentidoDoMovimento = "H";
                     }
                     else if (distX >= distXAnt && distY >= distYAnt && distX == distY)
                     {
-                        distMovCell[0] = celulaVolta.RowIndex;
-                        distMovCell[1] = celulaVolta.ColumnIndex;
-                        movSentido = "D";
+                        celulaMaisDistanteMovimento[0] = celulaVolta.RowIndex;
+                        celulaMaisDistanteMovimento[1] = celulaVolta.ColumnIndex;
+                        sentidoDoMovimento = "D";
                     }
                 }
             }
@@ -265,59 +315,59 @@ namespace APS3_CacaPalavras.Model
 
         public static DataGridView SelecionarCelulasMovOrientacao(DataGridView dataGridJogo)
         {
-            if (movSentido == "H")
+            if (sentidoDoMovimento == "H")
             {
-                for (int i = 0; i < Math.Abs(firstCell[1] - distMovCell[1]); i++)
+                for (int i = 0; i < Math.Abs(primeiraCelula[1] - celulaMaisDistanteMovimento[1]); i++)
                 {
-                    if (firstCell[1] - distMovCell[1] < 0)
+                    if (primeiraCelula[1] - celulaMaisDistanteMovimento[1] < 0)
                     {
-                        dataGridJogo.Rows[firstCell[0]].Cells[firstCell[1] + i].Selected = true;
+                        dataGridJogo.Rows[primeiraCelula[0]].Cells[primeiraCelula[1] + i].Selected = true;
                     }
                     else
                     {
-                        dataGridJogo.Rows[firstCell[0]].Cells[firstCell[1] - i].Selected = true;
+                        dataGridJogo.Rows[primeiraCelula[0]].Cells[primeiraCelula[1] - i].Selected = true;
                     }
                 }
             }
-            else if (movSentido == "V")
+            else if (sentidoDoMovimento == "V")
             {
-                for (int i = 0; i < Math.Abs(firstCell[0] - distMovCell[0]); i++)
+                for (int i = 0; i < Math.Abs(primeiraCelula[0] - celulaMaisDistanteMovimento[0]); i++)
                 {
-                    if (firstCell[0] - distMovCell[0] < 0)
+                    if (primeiraCelula[0] - celulaMaisDistanteMovimento[0] < 0)
                     {
-                        dataGridJogo.Rows[firstCell[0] + i].Cells[firstCell[1]].Selected = true;
+                        dataGridJogo.Rows[primeiraCelula[0] + i].Cells[primeiraCelula[1]].Selected = true;
                     }
                     else
                     {
-                        dataGridJogo.Rows[firstCell[0] - i].Cells[firstCell[1]].Selected = true;
+                        dataGridJogo.Rows[primeiraCelula[0] - i].Cells[primeiraCelula[1]].Selected = true;
                     }
                 }
             }
-            else if (movSentido == "D")
+            else if (sentidoDoMovimento == "D")
             {
-                int auxX = distMovCell[0] - firstCell[0];
-                int auxY = distMovCell[1] - firstCell[1];
+                int auxX = celulaMaisDistanteMovimento[0] - primeiraCelula[0];
+                int auxY = celulaMaisDistanteMovimento[1] - primeiraCelula[1];
 
-                int aux = Math.Abs(firstCell[0] - distMovCell[0]);
+                int aux = Math.Abs(primeiraCelula[0] - celulaMaisDistanteMovimento[0]);
 
 
                 for (int i = 0; i < aux; i++)
                 {
                     if (auxX < 0 && auxY > 0)// /\  >>
                     {
-                        dataGridJogo.Rows[firstCell[0] - i].Cells[firstCell[1] + i].Selected = true;
+                        dataGridJogo.Rows[primeiraCelula[0] - i].Cells[primeiraCelula[1] + i].Selected = true;
                     }
                     else if (auxX < 0 && auxY < 0)//   /\  <<
                     {
-                        dataGridJogo.Rows[firstCell[0] - i].Cells[firstCell[1] - i].Selected = true;
+                        dataGridJogo.Rows[primeiraCelula[0] - i].Cells[primeiraCelula[1] - i].Selected = true;
                     }
                     else if (auxX > 0 && auxY > 0)//    \/  >>
                     {
-                        dataGridJogo.Rows[firstCell[0] + i].Cells[firstCell[1] + i].Selected = true;
+                        dataGridJogo.Rows[primeiraCelula[0] + i].Cells[primeiraCelula[1] + i].Selected = true;
                     }
                     else if (auxX > 0 && auxY < 0)//   \/  <<
                     {
-                        dataGridJogo.Rows[firstCell[0] + i].Cells[firstCell[1] - i].Selected = true;
+                        dataGridJogo.Rows[primeiraCelula[0] + i].Cells[primeiraCelula[1] - i].Selected = true;
                     }
                 }
                 //MessageBox.Show("DEU ALGO ERRADO");
@@ -329,30 +379,28 @@ namespace APS3_CacaPalavras.Model
         {
             foreach (DataGridViewCell cell in dataGridJogo.SelectedCells)
             {
-                if (movSentido == "D")
+                if (sentidoDoMovimento == "D")
                 {
 
-                    int cellX = Math.Abs(cell.RowIndex - firstCell[0]);
-                    int cellY = Math.Abs(cell.ColumnIndex - firstCell[1]);
+                    int cellX = Math.Abs(cell.RowIndex - primeiraCelula[0]);
+                    int cellY = Math.Abs(cell.ColumnIndex - primeiraCelula[1]);
                     if (cellX != cellY)
                     {
                         cell.Selected = false;
                     }
                 }
-                else if (movSentido == "V")
+                else if (sentidoDoMovimento == "V")
                 {
-                    if (cell.ColumnIndex != firstCell[1])
+                    if (cell.ColumnIndex != primeiraCelula[1])
                         cell.Selected = false;
                 }
-                else if (movSentido == "H")
+                else if (sentidoDoMovimento == "H")
                 {
-                    if (cell.RowIndex != firstCell[0])
+                    if (cell.RowIndex != primeiraCelula[0])
                         cell.Selected = false;
                 }
             }
             return dataGridJogo;
         }
-
-
     }
 }

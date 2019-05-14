@@ -1,6 +1,6 @@
 ﻿namespace APS3_CacaPalavras.View
 {
-    partial class FormJogo
+    partial class FormJogoMatriz
     {
         /// <summary>
         /// Required designer variable.
@@ -61,11 +61,10 @@
             this.dataGridJogo.TabIndex = 0;
             this.dataGridJogo.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridJogo_CellMouseDown);
             this.dataGridJogo.CellMouseMove += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridJogo_CellMouseMove);
-            this.dataGridJogo.CellMouseUp += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridJogo_CellMouseUp);
             this.dataGridJogo.SelectionChanged += new System.EventHandler(this.dataGridJogo_SelectionChanged);
             this.dataGridJogo.MouseUp += new System.Windows.Forms.MouseEventHandler(this.dataGridJogo_MouseUp);
             // 
-            // FormJogo
+            // FormJogoMatriz
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -74,10 +73,12 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "FormJogo";
+            this.Name = "FormJogoMatriz";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FrmJogo";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormJogoMatriz_FormClosing);
             this.Load += new System.EventHandler(this.FrmJogo_Load);
+            this.LocationChanged += new System.EventHandler(this.FormJogoMatriz_LocationChanged);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridJogo)).EndInit();
             this.ResumeLayout(false);
 
@@ -85,6 +86,6 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridJogo;
+        public System.Windows.Forms.DataGridView dataGridJogo;
     }
 }
