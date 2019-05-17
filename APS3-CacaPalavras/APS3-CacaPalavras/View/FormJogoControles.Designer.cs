@@ -46,7 +46,7 @@
             this.dataGridPalavrasJogo.AllowUserToDeleteRows = false;
             this.dataGridPalavrasJogo.AllowUserToResizeColumns = false;
             this.dataGridPalavrasJogo.AllowUserToResizeRows = false;
-            this.dataGridPalavrasJogo.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.dataGridPalavrasJogo.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
             this.dataGridPalavrasJogo.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
@@ -68,11 +68,14 @@
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridPalavrasJogo.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridPalavrasJogo.Location = new System.Drawing.Point(12, 170);
+            this.dataGridPalavrasJogo.MultiSelect = false;
             this.dataGridPalavrasJogo.Name = "dataGridPalavrasJogo";
             this.dataGridPalavrasJogo.ReadOnly = true;
             this.dataGridPalavrasJogo.RowHeadersVisible = false;
             this.dataGridPalavrasJogo.Size = new System.Drawing.Size(307, 504);
             this.dataGridPalavrasJogo.TabIndex = 0;
+            this.dataGridPalavrasJogo.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridPalavrasJogo_ColumnHeaderMouseClick);
+            this.dataGridPalavrasJogo.CurrentCellChanged += new System.EventHandler(this.dataGridPalavrasJogo_CurrentCellChanged);
             // 
             // Palavras
             // 
@@ -94,10 +97,10 @@
             // 
             // txtDuracao
             // 
-            this.txtDuracao.BackColor = System.Drawing.SystemColors.Control;
+            this.txtDuracao.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.txtDuracao.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtDuracao.Cursor = System.Windows.Forms.Cursors.No;
-            this.txtDuracao.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDuracao.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDuracao.Location = new System.Drawing.Point(12, 26);
             this.txtDuracao.Name = "txtDuracao";
             this.txtDuracao.Size = new System.Drawing.Size(307, 62);

@@ -5,9 +5,9 @@ using System.Windows.Forms;
 
 namespace APS3_CacaPalavras.View
 {
-    public partial class FormAcesso : Form
+    public partial class FormLogin : Form
     {
-        public FormAcesso()
+        public FormLogin()
         {
             InitializeComponent();
         }

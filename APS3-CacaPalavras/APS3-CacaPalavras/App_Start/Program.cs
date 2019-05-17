@@ -17,7 +17,7 @@ namespace APS3_CacaPalavras
             Application.SetCompatibleTextRenderingDefault(false);
 
             //criando tela de acesso
-            FormAcesso frmAcesso = new FormAcesso();
+            FormLogin frmAcesso = new FormLogin();
 
             //validando dialogo do frmLogin
             DialogResult dialogResultLogin = frmAcesso.ShowDialog();

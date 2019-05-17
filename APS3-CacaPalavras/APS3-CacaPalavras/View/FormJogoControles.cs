@@ -13,7 +13,7 @@ namespace APS3_CacaPalavras.View
 {
     public partial class FormJogoControles : Form
     {
-        private readonly int SIZE_OF_HEIGHT_COLUNS_GRID = 40;
+        private readonly int SIZE_OF_HEIGHT_COLUNS_GRID = 33;
 
         bool pausado = false;
 
@@ -38,7 +38,7 @@ namespace APS3_CacaPalavras.View
 
         private void FormJogoControles_Load(object sender, EventArgs e)
         {
-
+            this.dataGridPalavrasJogo.ClearSelection();
         }
 
         private void btnPause_Click(object sender, EventArgs e)
@@ -53,7 +53,15 @@ namespace APS3_CacaPalavras.View
             }
         }
 
+        private void dataGridPalavrasJogo_CurrentCellChanged(object sender, EventArgs e)
+        {
+            this.dataGridPalavrasJogo.ClearSelection();
+        }
 
+        private void dataGridPalavrasJogo_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            this.dataGridPalavrasJogo.ClearSelection();
+        }
 
 
         //métodos
@@ -63,6 +71,7 @@ namespace APS3_CacaPalavras.View
             btnPause.Text = "Continuar";
             timerJogo.Stop();
             FormJogoMatriz.dataGridJogo.ForeColor = Color.White;
+            FormJogoMatriz.Enabled = false;
         }
 
         public void despausar()
@@ -71,6 +80,7 @@ namespace APS3_CacaPalavras.View
             btnPause.Text = "Pausar";
             timerJogo.Start();
             FormJogoMatriz.dataGridJogo.ForeColor = Color.Black;
+            FormJogoMatriz.Enabled = true;
         }
 
         private void popularGrid()
@@ -104,5 +114,6 @@ namespace APS3_CacaPalavras.View
                 }
             }
         }
+
     }
 }

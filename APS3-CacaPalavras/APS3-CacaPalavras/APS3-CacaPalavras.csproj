@@ -80,11 +80,11 @@
     <Compile Include="Util\TextboxMarcaDAgua.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="View\FormAcesso.cs">
+    <Compile Include="View\FormLogin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\FormAcesso.Designer.cs">
-      <DependentUpon>FormAcesso.cs</DependentUpon>
+    <Compile Include="View\FormLogin.Designer.cs">
+      <DependentUpon>FormLogin.cs</DependentUpon>
     </Compile>
     <Compile Include="View\FormCriarConta.cs">
       <SubType>Form</SubType>
@@ -128,8 +128,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="View\FormAcesso.resx">
-      <DependentUpon>FormAcesso.cs</DependentUpon>
+    <EmbeddedResource Include="View\FormLogin.resx">
+      <DependentUpon>FormLogin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\FormCriarConta.resx">
       <DependentUpon>FormCriarConta.cs</DependentUpon>

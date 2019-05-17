@@ -37,6 +37,7 @@ namespace APS3_CacaPalavras.Model
         public static int QtdPalavrasPorDificuldade(int i){
             return QTD_PALAVRAS_POR_NIVEL[i];
         }
+
         public static int TamanhoMatrizPorDificuldade(int i){
             return TAMANHO_MATRIZ_POR_NIVEL[i];
         }
@@ -350,14 +351,151 @@ namespace APS3_CacaPalavras.Model
 
     }
 
-
     //CONTINUAR UM JOGO JÁ INICIADO
     public class ContinuarJogo
     {
-        private static void CarregarJogo()
+        public static void CarregarJogo()
         {
 
+            consultarJogoEMatrizDB();
+            consultarPalavrasJogo();
+            consultarCelulasMatriz();
+            consultarCelulasPalavra();
+
         }
+
+        private static void consultarJogoEMatrizDB()
+        {
+            DBConn dBConn = new DBConn();
+
+            dBConn.LimparParametros();
+
+            dBConn.AdicionarParametros("IDUsuario", JogoExecucao.jogo.User.IdUsuario);
+
+            DataTable consulta = dBConn.ExecutarConsulta(CommandType.StoredProcedure, "cspConsultarJogoNaoFinalizado");
+
+            JogoExecucao.jogo.IdJogo = Convert.ToInt32(consulta.Rows[0]["IDJogo"]);
+
+            JogoExecucao.jogo.IdMatriz = Convert.ToInt32(consulta.Rows[0]["IDJogo"]);
+
+            JogoExecucao.jogo.NivelDificuldade = Convert.ToInt32(consulta.Rows[0]["NivelDificuldade"]);
+
+            JogoExecucao.jogo.DtJogo = Convert.ToDateTime(consulta.Rows[0]["DTJogo"]);
+
+            JogoExecucao.jogo.StatusJogo = Convert.ToBoolean(consulta.Rows[0]["StatusJogo"]);
+
+
+            JogoExecucao.jogo.DuracaoJogo = (TimeSpan)consulta.Rows[0]["Duracao"];
+
+            int auxTamanhoX = Convert.ToInt32(consulta.Rows[0]["TamanhoX"]);
+            int auxTamanhoY = Convert.ToInt32(consulta.Rows[0]["TamanhoY"]);
+
+            JogoExecucao.jogo.MatrizJogo = new char[auxTamanhoX, auxTamanhoY];
+
+        }
+
+        private static void consultarPalavrasJogo()
+        {
+            DBConn dBConn = new DBConn();
+
+            dBConn.LimparParametros();
+
+            dBConn.AdicionarParametros("IDJogo", JogoExecucao.jogo.IdJogo);
+
+            DataTable consulta = dBConn.ExecutarConsulta(CommandType.StoredProcedure, "cspPalavraJogoConsultar");
+
+            Palavra[] palavras = new Palavra[consulta.Rows.Count];
+
+            int i = 0; //contador
+
+            foreach (DataRow row in consulta.Rows)
+            {
+                Palavra palavra = new Palavra();
+
+                palavra.IdPalavraJogo = Convert.ToInt32(row["IDPalavraJogo"]);
+                palavra.IdJogo = Convert.ToInt32(row["IDJogo"]);
+                palavra.IdPalavra = Convert.ToInt32(row["IDPalavra"]);
+                palavra.StatusPalavra = Convert.ToBoolean(row["StatusPalavra"]);
+                palavra.CorPalavra = row["Cor"].ToString();
+
+                dBConn.LimparParametros();
+
+                dBConn.AdicionarParametros("IDPalavra", palavra.IdPalavra);
+
+                DataTable resultado = dBConn.ExecutarConsulta(CommandType.StoredProcedure, "cspPalavraConsultar");
+
+                palavra.TextoPalavra = resultado.Rows[0]["Palavra"].ToString();
+
+                palavras[i++] = palavra;
+            }
+            JogoExecucao.jogo.Palavras = palavras;
+        }
+
+        private static void consultarCelulasMatriz()
+        {
+            DBConn dBConn = new DBConn();
+
+            dBConn.LimparParametros();
+
+            dBConn.AdicionarParametros("IDMatriz", JogoExecucao.jogo.IdMatriz);
+
+            DataTable consulta = dBConn.ExecutarConsulta(CommandType.StoredProcedure, "cspCelulaMatrizConsultar");
+
+
+            char[,] auxMatriz = new char[JogoExecucao.jogo.MatrizJogo.GetLength(0), JogoExecucao.jogo.MatrizJogo.GetLength(1)];
+
+            foreach (DataRow row in consulta.Rows)
+            {
+                int auxX = Convert.ToInt32(row["PosicaoX"]);
+                int auxY = Convert.ToInt32(row["PosicaoY"]);
+
+                auxMatriz[auxX, auxY] = Convert.ToChar(row["Caracter"]);
+
+            }
+
+            JogoExecucao.jogo.MatrizJogo = auxMatriz;
+
+        }
+
+        private static void consultarCelulasPalavra()
+        {
+            DBConn dBConn = new DBConn();
+
+            foreach (Palavra p in JogoExecucao.jogo.Palavras)
+            {
+                dBConn.LimparParametros();
+
+                dBConn.AdicionarParametros("@IDPalavraJogo", p.IdPalavraJogo);
+
+                DataTable consulta = dBConn.ExecutarConsulta(CommandType.StoredProcedure, "cspCelulaPalavraConsultar");
+
+                int[,] posicao = new int[consulta.Rows.Count, 2];
+
+                int i = 0;
+
+                foreach (DataRow row in consulta.Rows)
+                {
+                    int auxX = Convert.ToInt32(row["PosicaoX"]);
+                    int auxY = Convert.ToInt32(row["PosicaoY"]);
+
+                    posicao[i, 0] = auxX;
+                    posicao[i, 1] = auxY;
+
+                   Boolean deu = (Boolean)row["CelulaInicial"];
+                    if (deu)
+                    {
+                        p.CelulaInicial[0, 0] = auxX;
+                        p.CelulaInicial[0, 1] = auxY;
+                    }
+                    i++; 
+                }
+                p.PosicaoPalavra = posicao;
+            }
+
+            Palavra[] aqui = JogoExecucao.jogo.Palavras;
+        }
+
+
     }
 }
 

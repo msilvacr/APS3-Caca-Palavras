@@ -115,8 +115,14 @@ namespace APS3_CacaPalavras.View
 
         private void ContinuarJogo()
         {
+            JogoExecucao.jogo = new Jogo();
+
+            //adicionando usuário
             JogoExecucao.jogo.User = UsuarioLogado.User;
 
+            Model.ContinuarJogo.CarregarJogo();
+
+            iniciarTelaJogo();
         }
 
         private void NovoJogo()
@@ -144,14 +150,7 @@ namespace APS3_CacaPalavras.View
                 //criando novo jogo
                 Model.NovoJogo.gerarJogo();
 
-                //chamando formJogo
-                FormJogoMatriz formJogo = new FormJogoMatriz();
-
-                this.Visible = false;
-
-                formJogo.ShowDialog();
-
-                this.Visible = true;
+                iniciarTelaJogo();
             }
         }
 
@@ -186,6 +185,18 @@ namespace APS3_CacaPalavras.View
         private void FormPrincipal_VisibleChanged(object sender, EventArgs e)
         {
             IniciarForm();
+        }
+
+        private void iniciarTelaJogo()
+        {
+            //chamando formJogo
+            FormJogoMatriz formJogo = new FormJogoMatriz();
+
+            this.Visible = false;
+
+            formJogo.ShowDialog();
+
+            this.Visible = true;
         }
     }
 } 

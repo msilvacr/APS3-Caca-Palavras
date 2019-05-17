@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormJogoMatriz));
             this.dataGridJogo = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridJogo)).BeginInit();
             this.SuspendLayout();
@@ -71,11 +72,11 @@
             this.ClientSize = new System.Drawing.Size(657, 656);
             this.Controls.Add(this.dataGridJogo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormJogoMatriz";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "FrmJogo";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormJogoMatriz_FormClosing);
             this.Load += new System.EventHandler(this.FrmJogo_Load);
             this.LocationChanged += new System.EventHandler(this.FormJogoMatriz_LocationChanged);

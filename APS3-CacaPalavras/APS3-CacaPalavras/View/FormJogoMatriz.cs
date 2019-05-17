@@ -27,6 +27,29 @@ namespace APS3_CacaPalavras.View
 
             iniciarFormControles();
 
+            string dificuldade = "";
+
+            switch(JogoExecucao.jogo.NivelDificuldade)
+            {
+                case 0:
+                    dificuldade = "Fácil";
+                    break;
+                case 1:
+                    dificuldade = "Normal";
+                    break;
+                case 2:
+                    dificuldade = "Difícil";
+                    break;
+                case 3:
+                    dificuldade = "INSANO";
+                    break;
+                default:
+                    break;
+
+            }
+
+            this.Text = String.Format("Woopy! - Nível {0}", dificuldade);
+
             //alterando fonte do grid a partir do nível de dificuldade
             alterarFonteGridPorDificuldade();
 
@@ -34,6 +57,8 @@ namespace APS3_CacaPalavras.View
             dataGridJogo = GameBoard.PopularGrid(dataGridJogo, JogoExecucao.jogo.MatrizJogo);
             dataGridJogo = GameBoard.AtualizarCoresGrid(dataGridJogo, JogoExecucao.jogo.Palavras);
             dataGridJogo.ClearSelection();
+
+            formJogoControles.atualizarCoresGrid();
         }
 
 
@@ -86,7 +111,12 @@ namespace APS3_CacaPalavras.View
 
         private void FormJogoMatriz_FormClosing(object sender, FormClosingEventArgs e)
         {
-            GameBoard.atualizarDuracaoJogo();
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                formJogoControles.pausar();
+                GameBoard.atualizarDuracaoJogo();
+                MessageBox.Show("O status atual do jogo foi salvo", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+            }
             formJogoControles.Dispose();
             this.Dispose();
         }

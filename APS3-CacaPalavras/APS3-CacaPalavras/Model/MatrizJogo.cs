@@ -11,7 +11,7 @@ namespace APS3_CacaPalavras.Model
 {
     class MatrizJogo
     {
-        private static readonly string abcd = "ABCDEFGHIJKLMNOPQRSTUVWXYZÇ";
+        private static readonly string abcd = "ABCDEFGHIJKLMNOPQRSTUVWXYZÇÁÉÃ";
 
         public static bool Gerar(Palavra[] palavras, char[,] matriz)
         {
