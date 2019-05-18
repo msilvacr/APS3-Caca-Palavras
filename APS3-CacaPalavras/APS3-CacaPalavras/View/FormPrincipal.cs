@@ -198,5 +198,18 @@ namespace APS3_CacaPalavras.View
 
             this.Visible = true;
         }
+
+        private void alterarInformaçõesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormAlterarDados formAlterarDados = new FormAlterarDados();
+
+            this.Visible = false;
+            DialogResult resultado = formAlterarDados.ShowDialog();
+            if(resultado == DialogResult.OK)
+            {
+                IniciarForm();
+            }
+            this.Visible = true;
+        }
     }
 } 

@@ -124,14 +124,15 @@
             // alterarSenhaToolStripMenuItem
             // 
             this.alterarSenhaToolStripMenuItem.Name = "alterarSenhaToolStripMenuItem";
-            this.alterarSenhaToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.alterarSenhaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.alterarSenhaToolStripMenuItem.Text = "Alterar senha";
             // 
             // alterarInformaçõesToolStripMenuItem
             // 
             this.alterarInformaçõesToolStripMenuItem.Name = "alterarInformaçõesToolStripMenuItem";
-            this.alterarInformaçõesToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
-            this.alterarInformaçõesToolStripMenuItem.Text = "Alterar informações";
+            this.alterarInformaçõesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.alterarInformaçõesToolStripMenuItem.Text = "Alterar dados";
+            this.alterarInformaçõesToolStripMenuItem.Click += new System.EventHandler(this.alterarInformaçõesToolStripMenuItem_Click);
             // 
             // históricoToolStripMenuItem
             // 
